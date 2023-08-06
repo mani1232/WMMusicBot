@@ -11,8 +11,8 @@ class ConfigUtils(val logger: Logger) {
     inline fun <reified T> loadFile(
         fileName: String, dataClass: T
     ): T {
+        val file = File(fileName)
         try {
-            val file = File(fileName)
             val dataClassComplete = if (file.createNewFile()) {
                 file.bufferedWriter().use {
                     it.write(Yaml.default.encodeToString(dataClass))
@@ -26,7 +26,12 @@ class ConfigUtils(val logger: Logger) {
             }
             return dataClassComplete
         } catch (e: SerializationException) {
-            logger.error(e.message)
+            logger.error(
+                """
+                Error in file: ${file.name}
+                ${e.message}
+            """.trimIndent()
+            )
             return dataClass
         }
     }
