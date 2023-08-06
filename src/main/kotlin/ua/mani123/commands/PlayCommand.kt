@@ -149,10 +149,12 @@ class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
 
         audioManager.openAudioConnection(voiceChannel)
 
+        val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, true)
+
         discordBot.playerManager.loadItemOrdered(
-            discordBot.getGuildAudioPlayer(event.guild!!, true),
+            guildAudioPlayer,
             event.getOption("url")!!.asString,
-            AudioLoadResultListener(event, discordBot, userLang)
+            AudioLoadResultListener(event, discordBot, userLang, guildAudioPlayer!!)
         )
     }
 }

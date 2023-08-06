@@ -15,13 +15,12 @@ import java.awt.Color
 class AudioLoadResultListener(
     private val event: SlashCommandInteractionEvent,
     private val discordBot: DiscordBot,
-    private val userLang: LangCode
+    private val userLang: LangCode,
+    private val guildAudioManager: GuildMusicManager
 ) : AudioLoadResultHandler {
 
-    private val guildAudioManager = discordBot.getGuildAudioPlayer(event.guild!!, true)
-
     override fun trackLoaded(track: AudioTrack) {
-        guildAudioManager!!.scheduler.queue(track)
+        guildAudioManager.scheduler.queue(track)
         event.hook.editOriginalEmbeds(
             EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
                 LangHashMap(discordBot.language.trackLoaded)[userLang]
@@ -30,7 +29,7 @@ class AudioLoadResultListener(
     }
 
     override fun playlistLoaded(playlist: AudioPlaylist) {
-        guildAudioManager!!.scheduler.queue(playlist)
+        guildAudioManager.scheduler.queue(playlist)
         event.hook.editOriginalEmbeds(
             EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor))
                 .setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
