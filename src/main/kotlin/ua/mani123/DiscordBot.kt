@@ -105,7 +105,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
                 { serviceEnabled },
                 { message, error -> logger.error(message, error) },
                 { message -> logger.info(message) },
-                true,
+                false,
                 false,
                 false
             )
