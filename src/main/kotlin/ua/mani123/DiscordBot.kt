@@ -82,7 +82,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
         }
     }
 
-    fun enableMetrics(platform: String) {
+    fun enableMetrics(platform: String, version: String) {
         if (stats.enabled) {
             metrics = MetricsBase(
                 "bukkit",
@@ -99,7 +99,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
                     it.appendField("coreCount", Runtime.getRuntime().availableProcessors())
                 },
                 {
-                    it.appendField("pluginVersion", "1.0.1.0")
+                    it.appendField("pluginVersion", version)
                 },
                 { it.run() },
                 { serviceEnabled },

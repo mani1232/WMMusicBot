@@ -7,6 +7,6 @@ fun main() {
     val discordBot = DiscordBot("config.yml", "lang.yml", "bstats.yml")
     discordBot.enableConsoleScanner()
     discordBot.runBot()
-    discordBot.enableMetrics("Default")
+    discordBot.enableMetrics("Default", "1.0.1.0")
 }
 

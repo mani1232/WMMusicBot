@@ -23,7 +23,7 @@ class PaperDiscordBot : JavaPlugin() {
             discordBot.logger = slF4JLogger
             logger.info("Starting discord bot as minecraft plugin")
             discordBot.runBot()
-            discordBot.enableMetrics("Minecraft bukkit plugin")
+            discordBot.enableMetrics("Minecraft bukkit plugin", this.pluginMeta.version)
         }
     }
 
