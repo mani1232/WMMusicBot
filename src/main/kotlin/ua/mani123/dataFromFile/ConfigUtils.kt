@@ -1,7 +1,8 @@
 package ua.mani123.dataFromFile
 
+import com.charleskorn.kaml.Yaml
 import kotlinx.serialization.decodeFromString
-import net.mamoe.yamlkt.Yaml
+import kotlinx.serialization.encodeToString
 import java.io.File
 
 class ConfigUtils {
@@ -11,12 +12,12 @@ class ConfigUtils {
         val file = File(fileName)
         val dataClassComplete = if (file.createNewFile()) {
             file.bufferedWriter().use {
-                it.write(Yaml.encodeToString(dataClass))
+                it.write(Yaml.default.encodeToString(dataClass))
                 it.close()
             }
             dataClass
         } else {
-            Yaml.decodeFromString(file.reader().use {
+            Yaml.default.decodeFromString(file.reader().use {
                 it.readLines().joinToString(separator = "\n")
             })
         }
