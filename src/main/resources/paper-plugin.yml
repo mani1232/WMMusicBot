@@ -1,0 +1,11 @@
+name: ${projectName}
+version: '${projectVersion}'
+main: ua.mani123.PaperDiscordBot
+load: STARTUP
+description: WMMusic discord bot, loaded as minecraft plugin
+api-version: '1.19'
+authors: [ mani123 ]
+website: https://worldmandia.cc/
+prefix: WMM
+has-open-classloader: false
+folia-supported: true
