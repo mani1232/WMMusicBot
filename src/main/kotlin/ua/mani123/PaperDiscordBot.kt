@@ -9,10 +9,17 @@ class PaperDiscordBot : JavaPlugin() {
     lateinit var discordBot: DiscordBot
     private var foliaLib = FoliaLib(this)
 
-    override fun onEnable() {
+    override fun onLoad() {
         saveDefaultConfig()
+    }
+
+    override fun onEnable() {
         foliaLib.impl.runAsync {
-            discordBot = DiscordBot("${dataFolder.path}/botConfig.yml", "${dataFolder.path}/lang.yml")
+            discordBot = DiscordBot(
+                "${dataFolder.path}/botConfig.yml",
+                "${dataFolder.path}/lang.yml",
+                "${dataFolder.path}/bstats.yml"
+            )
             discordBot.logger = slF4JLogger
             logger.info("Starting discord bot as minecraft plugin")
             discordBot.runBot()

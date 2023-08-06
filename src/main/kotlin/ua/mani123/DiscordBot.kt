@@ -20,17 +20,19 @@ import ua.mani123.commands.*
 import ua.mani123.dataFromFile.ConfigUtils
 import ua.mani123.dataFromFile.data.ConfigData
 import ua.mani123.dataFromFile.data.LanguageData
+import ua.mani123.dataFromFile.data.StatsData
 import ua.mani123.listeners.*
 import java.lang.reflect.Method
 import java.util.*
 import kotlin.system.exitProcess
 
 
-class DiscordBot(private val configPath: String, private val languagePath: String) {
+class DiscordBot(private val configPath: String, private val languagePath: String, private val statsPath: String) {
 
     var logger = LoggerFactory.getLogger(this.javaClass) as Logger
     lateinit var config: ConfigData
     lateinit var language: LanguageData
+    lateinit var stats: StatsData
     val musicManagers: MutableMap<Long, GuildMusicManager> = mutableMapOf()
     lateinit var commands: MutableSet<CommandApi>
     private lateinit var metrics: MetricsBase
@@ -41,6 +43,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
     fun runBot() {
         config = ConfigUtils(logger).loadFile(configPath, ConfigData())
         language = ConfigUtils(logger).loadFile(languagePath, LanguageData())
+        stats = ConfigUtils(logger).loadFile(statsPath, StatsData())
         commands = mutableSetOf(
             CurrentCommand(this),
             PlayCommand(this),
@@ -80,39 +83,41 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
     }
 
     fun enableMetrics(platform: String) {
-        metrics = MetricsBase(
-            "bukkit",
-            config.serviceUUID,
-            19414,
-            true,
-            {
-                it.appendField("serverSoftware", platform)
-                it.appendField("playerAmount", getPlayerAmount())
-                it.appendField("javaVersion", System.getProperty("java.version"))
-                it.appendField("osName", System.getProperty("os.name"))
-                it.appendField("osArch", System.getProperty("os.arch"))
-                it.appendField("osVersion", System.getProperty("os.version"))
-                it.appendField("coreCount", Runtime.getRuntime().availableProcessors())
-            },
-            {
-                it.appendField("pluginVersion", "1.0.1.0")
-            },
-            { it.run() },
-            { serviceEnabled },
-            { message, error -> logger.error(message, error) },
-            { message -> logger.info(message) },
-            true,
-            false,
-            false
-        )
-        metrics.addCustomChart(SingleLineChart("guilds") {
-            jda.guilds.size
-        })
-        metrics.addCustomChart(SingleLineChart("total_guilds_members") {
-            var totalMembers = 0
-            jda.guilds.forEach { totalMembers += it.memberCount }
-            totalMembers
-        })
+        if (stats.enabled) {
+            metrics = MetricsBase(
+                "bukkit",
+                stats.serviceUUID,
+                19414,
+                true,
+                {
+                    it.appendField("serverSoftware", platform)
+                    it.appendField("playerAmount", getPlayerAmount())
+                    it.appendField("javaVersion", System.getProperty("java.version"))
+                    it.appendField("osName", System.getProperty("os.name"))
+                    it.appendField("osArch", System.getProperty("os.arch"))
+                    it.appendField("osVersion", System.getProperty("os.version"))
+                    it.appendField("coreCount", Runtime.getRuntime().availableProcessors())
+                },
+                {
+                    it.appendField("pluginVersion", "1.0.1.0")
+                },
+                { it.run() },
+                { serviceEnabled },
+                { message, error -> logger.error(message, error) },
+                { message -> logger.info(message) },
+                true,
+                false,
+                false
+            )
+            metrics.addCustomChart(SingleLineChart("guilds") {
+                jda.guilds.size
+            })
+            metrics.addCustomChart(SingleLineChart("total_guilds_members") {
+                var totalMembers = 0
+                jda.guilds.forEach { totalMembers += it.memberCount }
+                totalMembers
+            })
+        }
     }
 
     private fun getPlayerAmount(): Int {
@@ -167,7 +172,9 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
             }
             playerManager.shutdown()
             jda.shutdownNow()
-            metrics.shutdown()
+            if (stats.enabled) {
+                metrics.shutdown()
+            }
         }
         logger.info("Bot is disabled")
     }
