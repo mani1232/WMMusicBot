@@ -2,11 +2,11 @@ package ua.mani123
 
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
-import net.dv8tion.jda.api.JDA
-import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.exceptions.InvalidTokenException
 import net.dv8tion.jda.api.requests.GatewayIntent
+import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder
+import net.dv8tion.jda.api.sharding.ShardManager
 import net.dv8tion.jda.api.utils.Compression
 import net.dv8tion.jda.api.utils.MemberCachePolicy
 import net.dv8tion.jda.api.utils.cache.CacheFlag
@@ -32,13 +32,13 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
     var logger = LoggerFactory.getLogger(this.javaClass) as Logger
     lateinit var config: ConfigData
     lateinit var language: LanguageData
-    lateinit var stats: StatsData
+    private lateinit var stats: StatsData
     val musicManagers: MutableMap<Long, GuildMusicManager> = mutableMapOf()
     lateinit var commands: MutableSet<CommandApi>
     private lateinit var metrics: MetricsBase
     val playerManager = DefaultAudioPlayerManager()
     private var serviceEnabled = false
-    lateinit var jda: JDA
+    lateinit var jda: ShardManager
 
     fun runBot() {
         config = ConfigUtils(logger).loadFile(configPath, ConfigData())
@@ -54,7 +54,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
             PauseCommand(this)
         )
         try {
-            jda = JDABuilder.createLight(config.botToken).setCompression(Compression.ZLIB)
+            jda = DefaultShardManagerBuilder.createLight(config.botToken).setCompression(Compression.ZLIB)
                 .setMemberCachePolicy(MemberCachePolicy.VOICE).enableCache(
                     mutableListOf(
                         CacheFlag.VOICE_STATE
@@ -171,7 +171,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
                 }
             }
             playerManager.shutdown()
-            jda.shutdownNow()
+            jda.shutdown()
             if (stats.enabled) {
                 metrics.shutdown()
             }
