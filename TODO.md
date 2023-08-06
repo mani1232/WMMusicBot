@@ -3,6 +3,7 @@
 - Relocate packages
 - Update dependencies
 - Custom embeds (In dev)
+- Fixes
 - Better logging config errors
 ###### Release v1.0.0.0
 - First release
