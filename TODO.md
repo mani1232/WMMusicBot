@@ -6,5 +6,6 @@
 - Fixes
 - enableLocalSource feature
 - Better logging config errors
+- Better logger messages
 ###### Release v1.0.0.0
 - First release
