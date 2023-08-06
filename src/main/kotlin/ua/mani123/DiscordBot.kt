@@ -154,19 +154,21 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
     @Synchronized
     fun shutdown() {
         logger.info("Disabling bot")
-        serviceEnabled = false
-        musicManagers.forEach { (_, u) ->
-            u.player.stopTrack()
-            u.player.destroy()
-        }
-        jda.guilds.forEach {
-            if (it.audioManager.isConnected) {
-                it.audioManager.closeAudioConnection()
+        if (serviceEnabled) {
+            serviceEnabled = false
+            musicManagers.forEach { (_, u) ->
+                u.player.stopTrack()
+                u.player.destroy()
             }
+            jda.guilds.forEach {
+                if (it.audioManager.isConnected) {
+                    it.audioManager.closeAudioConnection()
+                }
+            }
+            playerManager.shutdown()
+            jda.shutdownNow()
+            metrics.shutdown()
         }
-        playerManager.shutdown()
-        jda.shutdownNow()
-        metrics.shutdown()
         logger.info("Bot is disabled")
     }
 
