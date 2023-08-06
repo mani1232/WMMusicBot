@@ -8,7 +8,7 @@ class CommandsListener(private val discordBot: DiscordBot) : ListenerAdapter() {
 
     override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
         if (discordBot.config.debugCommandUsage) {
-            discordBot.logger.info("User ${event.member!!.nickname} from guild ${event.guild!!.id} used command /${event.fullCommandName}")
+            discordBot.logger.info("User ${event.user.name} from guild ${event.guild!!.id} used command /${event.fullCommandName}")
         }
         event.deferReply(true).queue()
         discordBot.commands.first { it.getCommandData().name == event.name }.run(event)
