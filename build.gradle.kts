@@ -23,6 +23,8 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
     implementation("net.mamoe.yamlkt:yamlkt:0.13.0")
     implementation("com.github.discord-jda:JDA:master-SNAPSHOT")
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+    implementation("commons-codec:commons-codec:1.16.0")
     implementation("dev.arbjerg:lavaplayer:5da733a776adaff37462451a6be4c036b3720949-SNAPSHOT")
     implementation("com.jcabi:jcabi-manifests:2.1.0")
     //implementation("dev.arbjerg:lavaplayer:2.0.0")
@@ -38,6 +40,11 @@ tasks.test {
 
 tasks.shadowJar {
     relocate("com.tcoded.folialib", "ua.mani123.folialib")
+    relocate("com.jcabi", "ua.mani123.jcabi-manifests")
+    relocate("ch.qos.logback", "ua.mani123.logback-classic")
+    relocate("net.mamoe.yamlkt", "ua.mani123.yamlkt")
+    relocate("dev.arbjerg", "ua.mani123.lavaplayer")
+    relocate("com.github.discord-jda", "ua.mani123.JDA")
 
     manifest {
         attributes(
