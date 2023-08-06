@@ -27,22 +27,23 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
     var logger = LoggerFactory.getLogger(this.javaClass) as Logger
     lateinit var config: ConfigData
     lateinit var language: LanguageData
-    val musicManagers: HashMap<Long, GuildMusicManager> = HashMap()
-    val commands: MutableSet<CommandApi> = mutableSetOf(
-        CurrentCommand(this),
-        PlayCommand(this),
-        SkipCommand(this),
-        StopCommand(this),
-        VolumeCommand(this),
-        ListCommand(this),
-        PauseCommand(this)
-    )
+    val musicManagers: MutableMap<Long, GuildMusicManager> = mutableMapOf()
+    lateinit var commands: MutableSet<CommandApi>
     val playerManager = DefaultAudioPlayerManager()
     lateinit var jda: JDA
 
     fun runBot() {
         config = ConfigUtils(logger).loadFile(configPath, ConfigData())
         language = ConfigUtils(logger).loadFile(languagePath, LanguageData())
+        commands = mutableSetOf(
+            CurrentCommand(this),
+            PlayCommand(this),
+            SkipCommand(this),
+            StopCommand(this),
+            VolumeCommand(this),
+            ListCommand(this),
+            PauseCommand(this)
+        )
         try {
             jda = JDABuilder.createLight(config.botToken)
                 .setCompression(Compression.ZLIB)
@@ -65,7 +66,9 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
                     VoiceListeners(this)
                 ).build()
             AudioSourceManagers.registerRemoteSources(playerManager)
-            AudioSourceManagers.registerLocalSource(playerManager)
+            if (config.enableLocalSource) {
+                AudioSourceManagers.registerLocalSource(playerManager)
+            }
         } catch (e: InvalidTokenException) {
             logger.error(e.message)
         } catch (e: IllegalArgumentException) {

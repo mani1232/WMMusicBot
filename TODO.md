@@ -4,6 +4,7 @@
 - Update dependencies
 - Custom embeds (In dev)
 - Fixes
+- enableLocalSource feature
 - Better logging config errors
 ###### Release v1.0.0.0
 - First release
