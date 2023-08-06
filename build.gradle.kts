@@ -26,6 +26,8 @@ dependencies {
     implementation("dev.arbjerg:lavaplayer:5da733a776adaff37462451a6be4c036b3720949-SNAPSHOT") {
         exclude("commons-codec")
     }
+    // https://mvnrepository.com/artifact/org.bstats/bstats-base
+    implementation("org.bstats:bstats-base:3.0.2")
     implementation("commons-codec:commons-codec:1.16.0")
     implementation("com.jcabi:jcabi-manifests:2.1.0")
     //implementation("dev.arbjerg:lavaplayer:2.0.0")
@@ -46,6 +48,7 @@ tasks.shadowJar {
     relocate("dev.arbjerg", "ua.mani123.lavaplayer")
     relocate("com.github.discord-jda", "ua.mani123.JDA")
     relocate("commons-codec", "ua.mani123.commons-codec")
+    relocate("org.bstats", "ua.mani123.bstats-base")
 
     manifest {
         attributes(
