@@ -34,8 +34,8 @@ class AudioLoadResultListener(
         event.hook.editOriginalEmbeds(
             EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor))
                 .setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                LangHashMap(discordBot.language.playlistLoaded)[userLang]
-            ).build()
+                    LangHashMap(discordBot.language.playlistLoaded)[userLang]
+                ).build()
         ).queue()
     }
 

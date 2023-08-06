@@ -22,11 +22,11 @@ import java.util.*
 import kotlin.system.exitProcess
 
 
-class DiscordBot(configPath: String, languagePath: String) {
+class DiscordBot(private val configPath: String, private val languagePath: String) {
 
     var logger = LoggerFactory.getLogger(this.javaClass) as Logger
-    val config = ConfigUtils().loadFile(configPath, ConfigData())
-    val language = ConfigUtils().loadFile(languagePath, LanguageData())
+    lateinit var config: ConfigData
+    lateinit var language: LanguageData
     val musicManagers: HashMap<Long, GuildMusicManager> = HashMap()
     val commands: MutableSet<CommandApi> = mutableSetOf(
         CurrentCommand(this),
@@ -41,6 +41,8 @@ class DiscordBot(configPath: String, languagePath: String) {
     var jda: JDA? = null
 
     fun runBot() {
+        config = ConfigUtils(logger).loadFile(configPath, ConfigData())
+        language = ConfigUtils(logger).loadFile(languagePath, LanguageData())
         try {
             jda = JDABuilder.createLight(config.botToken)
                 .setCompression(Compression.ZLIB)
@@ -65,6 +67,8 @@ class DiscordBot(configPath: String, languagePath: String) {
             AudioSourceManagers.registerRemoteSources(playerManager)
             AudioSourceManagers.registerLocalSource(playerManager)
         } catch (e: InvalidTokenException) {
+            logger.error(e.message)
+        } catch (e: IllegalArgumentException) {
             logger.error(e.message)
         }
     }
