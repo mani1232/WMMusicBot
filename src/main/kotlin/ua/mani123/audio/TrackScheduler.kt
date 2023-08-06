@@ -61,7 +61,7 @@ class TrackScheduler(private val player: AudioPlayer, private val discordBot: Di
     override fun onTrackEnd(player: AudioPlayer, track: AudioTrack, endReason: AudioTrackEndReason) {
         if (endReason.mayStartNext && !nextTrack()) {
             discordBot.musicManagers.filter { it.value.player == player }.firstNotNullOf {
-                discordBot.jda!!.getGuildById(it.key)!!.audioManager.closeAudioConnection()
+                discordBot.jda.getGuildById(it.key)!!.audioManager.closeAudioConnection()
                 it.value.player.destroy()
                 discordBot.musicManagers.remove(it.key)
             }
