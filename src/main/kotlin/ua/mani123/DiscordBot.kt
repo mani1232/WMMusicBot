@@ -38,7 +38,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
         PauseCommand(this)
     )
     val playerManager = DefaultAudioPlayerManager()
-    var jda: JDA? = null
+    lateinit var jda: JDA
 
     fun runBot() {
         config = ConfigUtils(logger).loadFile(configPath, ConfigData())
@@ -105,13 +105,13 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
             u.player.stopTrack()
             u.player.destroy()
         }
-        jda?.guilds?.forEach {
+        jda.guilds.forEach {
             if (it.audioManager.isConnected) {
                 it.audioManager.closeAudioConnection()
             }
         }
         playerManager.shutdown()
-        jda?.shutdownNow()
+        jda.shutdownNow()
         logger.info("Bot is disabled")
     }
 
