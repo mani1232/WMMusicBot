@@ -1,15 +1,14 @@
 package ua.mani123.commands
 
-import ua.mani123.DiscordBot
-import ua.mani123.dataFromFile.LangCode
-import ua.mani123.dataFromFile.LangHashMap
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.DiscordLocale
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
+import ua.mani123.DiscordBot
+import ua.mani123.dataFromFile.LangCode
+import ua.mani123.dataFromFile.LangHashMap
 import java.awt.Color
-import java.lang.IllegalArgumentException
 
 class PauseCommand(private val discordBot: DiscordBot) : CommandApi {
 

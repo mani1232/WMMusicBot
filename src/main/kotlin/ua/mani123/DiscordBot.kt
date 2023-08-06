@@ -22,7 +22,7 @@ import java.util.*
 import kotlin.system.exitProcess
 
 
-class DiscordBot(configPath : String, languagePath : String) {
+class DiscordBot(configPath: String, languagePath: String) {
 
     var logger = LoggerFactory.getLogger(this.javaClass) as Logger
     val config = ConfigUtils().loadFile(configPath, ConfigData())
@@ -38,7 +38,7 @@ class DiscordBot(configPath : String, languagePath : String) {
         PauseCommand(this)
     )
     val playerManager = DefaultAudioPlayerManager()
-    var jda : JDA? = null
+    var jda: JDA? = null
 
     fun runBot() {
         try {
@@ -80,11 +80,14 @@ class DiscordBot(configPath : String, languagePath : String) {
                     "/stop" -> {
                         exitProcess(0)
                     }
+
                     else -> {
-                        logger.info("""
+                        logger.info(
+                            """
                             <-- Command info -->
                             /stop - Stop bot
-                        """.trimIndent())
+                        """.trimIndent()
+                        )
                     }
                 }
             }
@@ -93,21 +96,19 @@ class DiscordBot(configPath : String, languagePath : String) {
 
     @Synchronized
     fun shutdown() {
-        try {
-            logger.info("Disabling bot")
-            musicManagers.forEach { (_, u) ->
-                u.player.stopTrack()
-                u.player.destroy()
+        logger.info("Disabling bot")
+        musicManagers.forEach { (_, u) ->
+            u.player.stopTrack()
+            u.player.destroy()
+        }
+        jda?.guilds?.forEach {
+            if (it.audioManager.isConnected) {
+                it.audioManager.closeAudioConnection()
             }
-            jda?.guilds?.forEach {
-                if (it.audioManager.isConnected) {
-                    it.audioManager.closeAudioConnection()
-                }
-            }
-            playerManager.shutdown()
-            jda?.shutdownNow()
-            logger.info("Bot is disabled")
-        } catch (_: Exception) { }
+        }
+        playerManager.shutdown()
+        jda?.shutdownNow()
+        logger.info("Bot is disabled")
     }
 
     @Synchronized

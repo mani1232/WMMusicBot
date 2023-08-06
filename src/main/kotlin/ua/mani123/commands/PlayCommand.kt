@@ -1,9 +1,5 @@
 package ua.mani123.commands
 
-import ua.mani123.DiscordBot
-import ua.mani123.dataFromFile.LangCode
-import ua.mani123.dataFromFile.LangHashMap
-import ua.mani123.audio.AudioLoadResultListener
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.DiscordLocale
@@ -11,8 +7,11 @@ import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
+import ua.mani123.DiscordBot
+import ua.mani123.audio.AudioLoadResultListener
+import ua.mani123.dataFromFile.LangCode
+import ua.mani123.dataFromFile.LangHashMap
 import java.awt.Color
-import java.lang.IllegalArgumentException
 
 class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
 
@@ -70,7 +69,10 @@ class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.POLISH, LangHashMap(language.commandPlayStringOptionName)[LangCode.PL]),
                 Pair(DiscordLocale.FRENCH, LangHashMap(language.commandPlayStringOptionName)[LangCode.FR]),
                 Pair(DiscordLocale.SPANISH, LangHashMap(language.commandPlayStringOptionName)[LangCode.ES]),
-                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.commandPlayStringOptionName)[LangCode.PT]),
+                Pair(
+                    DiscordLocale.PORTUGUESE_BRAZILIAN,
+                    LangHashMap(language.commandPlayStringOptionName)[LangCode.PT]
+                ),
                 Pair(DiscordLocale.JAPANESE, LangHashMap(language.commandPlayStringOptionName)[LangCode.JA]),
                 Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.commandPlayStringOptionName)[LangCode.ZH]),
                 Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.commandPlayStringOptionName)[LangCode.ZH]),
@@ -89,10 +91,19 @@ class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.POLISH, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.PL]),
                 Pair(DiscordLocale.FRENCH, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.FR]),
                 Pair(DiscordLocale.SPANISH, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.ES]),
-                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.PT]),
+                Pair(
+                    DiscordLocale.PORTUGUESE_BRAZILIAN,
+                    LangHashMap(language.commandPlayStringOptionDescription)[LangCode.PT]
+                ),
                 Pair(DiscordLocale.JAPANESE, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.JA]),
-                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.ZH]),
-                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.ZH]),
+                Pair(
+                    DiscordLocale.CHINESE_CHINA,
+                    LangHashMap(language.commandPlayStringOptionDescription)[LangCode.ZH]
+                ),
+                Pair(
+                    DiscordLocale.CHINESE_TAIWAN,
+                    LangHashMap(language.commandPlayStringOptionDescription)[LangCode.ZH]
+                ),
                 Pair(DiscordLocale.BULGARIAN, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.BG]),
                 Pair(DiscordLocale.HINDI, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.HI]),
                 Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.commandPlayStringOptionDescription)[LangCode.HU]),
@@ -117,21 +128,31 @@ class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
 
         val voiceChannel = event.member!!.voiceState!!.channel
         if (voiceChannel == null) {
-            hook.editOriginalEmbeds(EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                LangHashMap(discordBot.language.joinRequired)[userLang]).build()).queue()
+            hook.editOriginalEmbeds(
+                EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
+                    LangHashMap(discordBot.language.joinRequired)[userLang]
+                ).build()
+            ).queue()
             return
         }
 
         val audioManager = event.guild!!.audioManager
 
         if (audioManager.isConnected && audioManager.connectedChannel != voiceChannel) {
-            hook.editOriginalEmbeds(EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                LangHashMap(discordBot.language.alreadyBotJoined)[userLang]).build()).queue()
+            hook.editOriginalEmbeds(
+                EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
+                    LangHashMap(discordBot.language.alreadyBotJoined)[userLang]
+                ).build()
+            ).queue()
             return
         }
 
         audioManager.openAudioConnection(voiceChannel)
 
-        discordBot.playerManager.loadItemOrdered(discordBot.getGuildAudioPlayer(event.guild!!, true), event.getOption("url")!!.asString, AudioLoadResultListener(event, discordBot, userLang))
+        discordBot.playerManager.loadItemOrdered(
+            discordBot.getGuildAudioPlayer(event.guild!!, true),
+            event.getOption("url")!!.asString,
+            AudioLoadResultListener(event, discordBot, userLang)
+        )
     }
 }

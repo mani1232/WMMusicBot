@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class PaperDiscordBot : JavaPlugin() {
 
-    lateinit var discordBot : DiscordBot
+    lateinit var discordBot: DiscordBot
     private var foliaLib = FoliaLib(this)
 
     override fun onEnable() {

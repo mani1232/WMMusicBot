@@ -1,7 +1,7 @@
 package ua.mani123.dataFromFile.data
 
-import ua.mani123.dataFromFile.LangCode
 import kotlinx.serialization.Serializable
+import ua.mani123.dataFromFile.LangCode
 
 @Serializable
 data class LanguageData(
