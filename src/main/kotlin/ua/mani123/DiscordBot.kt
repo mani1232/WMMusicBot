@@ -47,7 +47,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
         language = ConfigUtils(logger).loadFile(languagePath, LanguageData())
         stats = ConfigUtils(logger).loadFile(statsPath, StatsData())
         if (!can) {
-            shutdown()
+            exitProcess(0)
         }
         commands = mutableSetOf(
             CurrentCommand(this),
