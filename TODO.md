@@ -10,5 +10,6 @@
 - Better logger messages
 - Added metrics bstats
 - Added comments
+- License system
 ###### Release v1.0.0.0
 - First release

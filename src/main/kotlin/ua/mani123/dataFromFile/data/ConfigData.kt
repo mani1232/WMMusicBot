@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ConfigData(
+    @YamlComment("Bot license, you can get it here: https://discord.worldmandia.cc")
+    val botLicense: String = "LICENSE_HERE",
     @YamlComment("Bot token, from https://discord.com/developers/applications")
     val botToken: String = "CHANGE_HERE",
     @YamlComment("You can fully disable auto-leave")

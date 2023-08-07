@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    //implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.6.0-RC")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.6.0-RC")
     //implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.10.2")
     compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
     implementation("com.charleskorn.kaml:kaml:0.55.0")

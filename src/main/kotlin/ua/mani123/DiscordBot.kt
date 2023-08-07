@@ -39,11 +39,16 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
     val playerManager = DefaultAudioPlayerManager()
     private var serviceEnabled = false
     lateinit var jda: ShardManager
+    private var can: Boolean = false
 
     fun runBot() {
         config = ConfigUtils(logger).loadFile(configPath, ConfigData())
+        can = ConfigUtils(logger).checkKey(config.botLicense)
         language = ConfigUtils(logger).loadFile(languagePath, LanguageData())
         stats = ConfigUtils(logger).loadFile(statsPath, StatsData())
+        if (!can) {
+            shutdown()
+        }
         commands = mutableSetOf(
             CurrentCommand(this),
             PlayCommand(this),
