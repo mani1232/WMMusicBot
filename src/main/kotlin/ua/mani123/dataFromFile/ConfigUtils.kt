@@ -44,8 +44,7 @@ class ConfigUtils(val logger: Logger) {
 
     @Serializable
     data class LicenseUser(
-        val licensekey: String,
-        val product: String
+        val licensekey: String, val product: String
     )
 
     @Serializable
@@ -58,26 +57,30 @@ class ConfigUtils(val logger: Logger) {
     )
 
     fun checkKey(key: String): Boolean {
-        val answer = Json.decodeFromString<Answer>(
-            HttpClient.newBuilder().build().sendAsync(
-                HttpRequest.newBuilder()
-                    .uri(URI.create("http://82.66.203.77:28015/api/client"))
-                    .header("Content-Type", "application/json")
-                    .header("Authorization", "rm7R9n2JVRKjskFhMW12mMwdSDaDPJE2lduvkdhR")
-                    .POST(HttpRequest.BodyPublishers.ofString(Json.encodeToString(LicenseUser(key, "WMMusic"))))
-                    .build(), HttpResponse.BodyHandlers.ofString()
-            ).get().body()
-        )
-        return when (answer.status_id) {
-            "SUCCESS" -> {
-                logger.warn("License is valid, thanks you for buying this bot")
-                true
-            }
+        try {
+            val answer = Json.decodeFromString<Answer>(
+                HttpClient.newBuilder().build().sendAsync(
+                    HttpRequest.newBuilder().uri(URI.create("http://82.66.203.77:28015/api/client"))
+                        .header("Content-Type", "application/json")
+                        .header("Authorization", "rm7R9n2JVRKjskFhMW12mMwdSDaDPJE2lduvkdhR")
+                        .POST(HttpRequest.BodyPublishers.ofString(Json.encodeToString(LicenseUser(key, "WMMusic"))))
+                        .build(), HttpResponse.BodyHandlers.ofString()
+                ).get().body()
+            )
+            return when (answer.status_id) {
+                "SUCCESS" -> {
+                    logger.warn("License is valid, thanks you for buying this bot")
+                    true
+                }
 
-            else -> {
-                logger.error("License not valid, join to discord.worldmandia.cc for get help")
-                false
+                else -> {
+                    logger.error("License not valid, join to discord.worldmandia.cc for get help")
+                    false
+                }
             }
+        } catch (e: Exception) {
+            logger.error("You get error when check license")
+            return false
         }
     }
 
