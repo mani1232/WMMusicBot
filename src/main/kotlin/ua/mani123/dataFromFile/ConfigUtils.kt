@@ -69,12 +69,12 @@ class ConfigUtils(val logger: Logger) {
             )
             return when (answer.status_id) {
                 "SUCCESS" -> {
-                    logger.warn("License is valid, thanks you for buying this bot")
+                    logger.info("The license is valid, thank you for purchasing this bot")
                     true
                 }
 
                 else -> {
-                    logger.error("License not valid, join to discord.worldmandia.cc for get help")
+                    logger.error("The license is not valid, join to discord.worldmandia.cc for get help")
                     false
                 }
             }
