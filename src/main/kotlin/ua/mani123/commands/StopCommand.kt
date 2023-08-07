@@ -1,6 +1,5 @@
 package ua.mani123.commands
 
-import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.DiscordLocale
 import net.dv8tion.jda.api.interactions.commands.build.Commands
@@ -8,7 +7,6 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
 import ua.mani123.DiscordBot
 import ua.mani123.dataFromFile.LangCode
 import ua.mani123.dataFromFile.LangHashMap
-import java.awt.Color
 
 class StopCommand(private val discordBot: DiscordBot) : CommandApi {
 
@@ -20,40 +18,43 @@ class StopCommand(private val discordBot: DiscordBot) : CommandApi {
         val language = discordBot.language
         command.nameLocalizations.setTranslations(
             mutableMapOf(
-                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.commandStopName)[LangCode.RU]),
-                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.commandStopName)[LangCode.EN]),
-                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.commandStopName)[LangCode.UK]),
-                Pair(DiscordLocale.DUTCH, LangHashMap(language.commandStopName)[LangCode.DE]),
-                Pair(DiscordLocale.POLISH, LangHashMap(language.commandStopName)[LangCode.PL]),
-                Pair(DiscordLocale.FRENCH, LangHashMap(language.commandStopName)[LangCode.FR]),
-                Pair(DiscordLocale.SPANISH, LangHashMap(language.commandStopName)[LangCode.ES]),
-                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.commandStopName)[LangCode.PT]),
-                Pair(DiscordLocale.JAPANESE, LangHashMap(language.commandStopName)[LangCode.JA]),
-                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.commandStopName)[LangCode.ZH]),
-                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.commandStopName)[LangCode.ZH]),
-                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.commandStopName)[LangCode.BG]),
-                Pair(DiscordLocale.HINDI, LangHashMap(language.commandStopName)[LangCode.HI]),
-                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.commandStopName)[LangCode.HU]),
-                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.commandStopName)[LangCode.EN])
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.stopCommandData)[LangCode.RU].name),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.stopCommandData)[LangCode.EN].name),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.stopCommandData)[LangCode.UK].name),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.stopCommandData)[LangCode.DE].name),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.stopCommandData)[LangCode.PL].name),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.stopCommandData)[LangCode.FR].name),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.stopCommandData)[LangCode.ES].name),
+                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.stopCommandData)[LangCode.PT].name),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.stopCommandData)[LangCode.JA].name),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.stopCommandData)[LangCode.ZH].name),
+                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.stopCommandData)[LangCode.ZH].name),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.stopCommandData)[LangCode.BG].name),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.stopCommandData)[LangCode.HI].name),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.stopCommandData)[LangCode.HU].name),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.stopCommandData)[LangCode.EN].name)
             )
         )
         command.descriptionLocalizations.setTranslations(
             mutableMapOf(
-                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.commandStopDescription)[LangCode.RU]),
-                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.commandStopDescription)[LangCode.EN]),
-                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.commandStopDescription)[LangCode.UK]),
-                Pair(DiscordLocale.DUTCH, LangHashMap(language.commandStopDescription)[LangCode.DE]),
-                Pair(DiscordLocale.POLISH, LangHashMap(language.commandStopDescription)[LangCode.PL]),
-                Pair(DiscordLocale.FRENCH, LangHashMap(language.commandStopDescription)[LangCode.FR]),
-                Pair(DiscordLocale.SPANISH, LangHashMap(language.commandStopDescription)[LangCode.ES]),
-                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.commandStopDescription)[LangCode.PT]),
-                Pair(DiscordLocale.JAPANESE, LangHashMap(language.commandStopDescription)[LangCode.JA]),
-                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.commandStopDescription)[LangCode.ZH]),
-                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.commandStopDescription)[LangCode.ZH]),
-                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.commandStopDescription)[LangCode.BG]),
-                Pair(DiscordLocale.HINDI, LangHashMap(language.commandStopDescription)[LangCode.HI]),
-                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.commandStopDescription)[LangCode.HU]),
-                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.commandStopDescription)[LangCode.EN])
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.stopCommandData)[LangCode.RU].description),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.stopCommandData)[LangCode.EN].description),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.stopCommandData)[LangCode.UK].description),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.stopCommandData)[LangCode.DE].description),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.stopCommandData)[LangCode.PL].description),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.stopCommandData)[LangCode.FR].description),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.stopCommandData)[LangCode.ES].description),
+                Pair(
+                    DiscordLocale.PORTUGUESE_BRAZILIAN,
+                    LangHashMap(language.stopCommandData)[LangCode.PT].description
+                ),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.stopCommandData)[LangCode.JA].description),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.stopCommandData)[LangCode.ZH].description),
+                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.stopCommandData)[LangCode.ZH].description),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.stopCommandData)[LangCode.BG].description),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.stopCommandData)[LangCode.HI].description),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.stopCommandData)[LangCode.HU].description),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.stopCommandData)[LangCode.EN].description)
             )
         )
     }
@@ -74,9 +75,7 @@ class StopCommand(private val discordBot: DiscordBot) : CommandApi {
         val voiceChannel = event.member!!.voiceState!!.channel
         if (voiceChannel == null || event.guild!!.audioManager.connectedChannel != voiceChannel) {
             hook.editOriginalEmbeds(
-                EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                    LangHashMap(discordBot.language.cantUseCommand)[userLang]
-                ).build()
+                LangHashMap(discordBot.language.cantUseData).generateEmbed(userLang)
             ).queue()
             return
         }
@@ -85,9 +84,7 @@ class StopCommand(private val discordBot: DiscordBot) : CommandApi {
 
         if (guildAudioPlayer != null) {
             hook.editOriginalEmbeds(
-                EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                    LangHashMap(discordBot.language.stopCommandAnswer)[userLang]
-                ).build()
+                LangHashMap(discordBot.language.stopCommandAnswerData).generateEmbed(userLang)
             ).queue()
             guildAudioPlayer.player.destroy()
             discordBot.musicManagers.remove(event.guild!!.id.toLong())
@@ -96,9 +93,7 @@ class StopCommand(private val discordBot: DiscordBot) : CommandApi {
         }
 
         hook.editOriginalEmbeds(
-            EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                LangHashMap(discordBot.language.alreadyBotStopped)[userLang]
-            ).build()
+            LangHashMap(discordBot.language.alreadyStoppedData).generateEmbed(userLang)
         ).queue()
     }
 }

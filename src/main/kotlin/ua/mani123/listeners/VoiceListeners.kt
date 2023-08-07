@@ -9,7 +9,7 @@ import ua.mani123.DiscordBot
 class VoiceListeners(private val discordBot: DiscordBot) : ListenerAdapter() {
 
     override fun onGuildVoiceUpdate(event: GuildVoiceUpdateEvent) {
-        if (event.channelLeft != null && event.guild.audioManager.connectedChannel != null && event.channelLeft!!.id == event.guild.audioManager.connectedChannel!!.id && (event.channelLeft!!.members.size <= 1 && event.channelLeft is VoiceChannel) && (event.channelLeft is StageChannel == discordBot.config.autoLeaveFromStage)) {
+        if (discordBot.config.autoLeaveFeature && event.channelLeft != null && event.guild.audioManager.connectedChannel != null && event.channelLeft!!.id == event.guild.audioManager.connectedChannel!!.id && (event.channelLeft!!.members.size <= 1 && event.channelLeft is VoiceChannel) && (event.channelLeft is StageChannel == discordBot.config.autoLeaveFromStage)) {
             val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild, false)
             if (guildAudioPlayer != null) {
                 guildAudioPlayer.player.destroy()

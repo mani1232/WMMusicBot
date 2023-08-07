@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CustomEmbedData(
-    val title: String = "empty_title",
-    val description: String = "empty_description",
-    val color: String = "#ffffff"
+    val title: String = "",
+    val description: String = "",
+    val color: String = "#d61313"
 )

@@ -1,11 +1,12 @@
 package ua.mani123.dataFromFile.data
 
+import com.charleskorn.kaml.YamlComment
 import kotlinx.serialization.Serializable
 import ua.mani123.dataFromFile.LangCode
 
 @Serializable
 data class LanguageData(
-    // list supported langs
+    @YamlComment("List of supported languages")
     val testString: HashMap<LangCode, String> = HashMap(
         mapOf(
             Pair(LangCode.EN, LangCode.EN.langName),
@@ -23,226 +24,139 @@ data class LanguageData(
             Pair(LangCode.ZH, LangCode.ZH.langName)
         )
     ),
-    // Commands
-    val commandCurrentName: HashMap<LangCode, String> = HashMap(
+    @YamlComment("Embeds")
+    val cantUseData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "current")
+            Pair(LangCode.EN, CustomEmbedData(title = "You cant use this command"))
         )
     ),
-    val commandCurrentDescription: HashMap<LangCode, String> = HashMap(
+    val pauseCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Send info about current track")
+            Pair(LangCode.EN, CustomEmbedData(title = "Player paused: %s"))
         )
     ),
-    val commandStopName: HashMap<LangCode, String> = HashMap(
+    val skipCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "stop")
+            Pair(LangCode.EN, CustomEmbedData(title = "Current track skipped and start playing next track"))
         )
     ),
-    val commandStopDescription: HashMap<LangCode, String> = HashMap(
+    val currentCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Stops the player")
+            Pair(LangCode.EN, CustomEmbedData(title = "Current track", description = "%s"))
         )
     ),
-    val commandVolumeName: HashMap<LangCode, String> = HashMap(
+    val listCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "volume")
+            Pair(LangCode.EN, CustomEmbedData(title = "Queue", description = "%s"))
         )
     ),
-    val commandVolumeDescription: HashMap<LangCode, String> = HashMap(
+    val volumeCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Edit player volume")
+            Pair(LangCode.EN, CustomEmbedData(title = "Volume set to %s"))
         )
     ),
-    val commandVolumeOptionName: HashMap<LangCode, String> = HashMap(
+    val volumeCommandInfoData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "volume")
+            Pair(LangCode.EN, CustomEmbedData(title = "Volume %s"))
         )
     ),
-    val commandVolumeOptionDescription: HashMap<LangCode, String> = HashMap(
+    val stopCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Value for volume")
+            Pair(LangCode.EN, CustomEmbedData(title = "Player stopped"))
         )
     ),
-    val commandVolumeAnswer: HashMap<LangCode, String> = HashMap(
+    val alreadyStoppedData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Volume set to %s")
+            Pair(LangCode.EN, CustomEmbedData(title = "This bot already stopped"))
         )
     ),
-    val commandVolumeError: HashMap<LangCode, String> = HashMap(
+    val emptyQueueData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "You cant set volume")
+            Pair(LangCode.EN, CustomEmbedData(title = "Queue is empty"))
         )
     ),
-    val commandVolumeInfo: HashMap<LangCode, String> = HashMap(
+    val trackLoadedData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Volume: %s")
+            Pair(LangCode.EN, CustomEmbedData(title = "Track loaded"))
         )
     ),
-    val commandSkipName: HashMap<LangCode, String> = HashMap(
+    val playlistLoadedData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "skip")
+            Pair(LangCode.EN, CustomEmbedData(title = "Playlist loaded"))
         )
     ),
-    val commandSkipDescription: HashMap<LangCode, String> = HashMap(
+    val noMatchesData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Skip current track and start play next")
+            Pair(LangCode.EN, CustomEmbedData(title = "No matches"))
         )
     ),
-    val commandListName: HashMap<LangCode, String> = HashMap(
+    val filedLoadData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "list")
+            Pair(LangCode.EN, CustomEmbedData(title = "Filed load with error message %s"))
         )
     ),
-    val commandListDescription: HashMap<LangCode, String> = HashMap(
+    val botAlreadyJoinedData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Send list of tracks in queue")
+            Pair(LangCode.EN, CustomEmbedData(title = "Bot already joined to voice channel"))
         )
     ),
-    val commandPlayName: HashMap<LangCode, String> = HashMap(
+    val joinRequiredData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "play")
+            Pair(LangCode.EN, CustomEmbedData(title = "You need join to voice channel for use this command"))
         )
     ),
-    val commandPlayDescription: HashMap<LangCode, String> = HashMap(
+    @YamlComment("Commands")
+    val stopCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Starts playing a track")
+            Pair(
+                LangCode.EN,
+                CustomCommandData(name = "stop", description = "Stop bot playing and leave from voice channel")
+            )
         )
     ),
-    val commandPlayStringOptionName: HashMap<LangCode, String> = HashMap(
+    val pauseCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "url")
+            Pair(LangCode.EN, CustomCommandData(name = "pause", description = "Pause track"))
         )
     ),
-    val commandPlayStringOptionDescription: HashMap<LangCode, String> = HashMap(
+    val skipCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "music url")
+            Pair(LangCode.EN, CustomCommandData(name = "skip", description = "Skip current track"))
         )
     ),
-    val commandListOptionName: HashMap<LangCode, String> = HashMap(
+    val volumeCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "count")
+            Pair(LangCode.EN, CustomCommandData(name = "volume", description = "Edit player volume"))
         )
     ),
-    val commandListOptionDescription: HashMap<LangCode, String> = HashMap(
+    val volumeCommandOptionData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Max tracks count in list")
+            Pair(LangCode.EN, CustomCommandData(name = "volume", description = "Value for volume"))
         )
     ),
-    val commandPauseName: HashMap<LangCode, String> = HashMap(
+    val listCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "pause")
+            Pair(LangCode.EN, CustomCommandData(name = "list", description = "Send list of tracks in queue"))
         )
     ),
-    val commandPauseDescription: HashMap<LangCode, String> = HashMap(
+    val listCommandOptionData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Pauses the current track")
+            Pair(LangCode.EN, CustomCommandData(name = "count", description = "Max tracks count in list"))
         )
     ),
-    // embed answers
-    val joinRequired: HashMap<LangCode, String> = HashMap(
+    val currentCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Pls, join to voice channel")
+            Pair(LangCode.EN, CustomCommandData(name = "current", description = "Send info about current track"))
         )
     ),
-    val pauseCommandAnswer: HashMap<LangCode, String> = HashMap(
+    val playCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Track paused status %s")
+            Pair(LangCode.EN, CustomCommandData(name = "play", description = "Starts playing track"))
         )
     ),
-    val skipCommandError: HashMap<LangCode, String> = HashMap(
+    val playCommandOptionData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, "Player dont have queue")
-        )
-    ),
-    val listCommandError: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Queue is empty")
-        )
-    ),
-    val listCommandAnswer: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Queue list")
-        )
-    ),
-    val listCommandEmpty: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Queue is empty")
-        )
-    ),
-    val stopCommandAnswer: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Stopped")
-        )
-    ),
-    val botConnected: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Bot connected")
-        )
-    ),
-    val trackLoaded: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Track loaded and started playing")
-        )
-    ),
-    val playlistLoaded: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Playlist loaded and started playing first track")
-        )
-    ),
-    val noMatches: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "No Matches")
-        )
-    ),
-    val skipCommandAnswer: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Skiped music and start play next")
-        )
-    ),
-    val skipEmptyQueueCommandAnswer: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Queue is empty for skip")
-        )
-    ),
-    val currentEmptyTrackCommandAnswer: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Current track not found")
-        )
-    ),
-    val currentTrackCommandAnswer: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Current track: %s")
-        )
-    ),
-    val alreadyBotJoined: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Bot already joined and play music in another voice channel")
-        )
-    ),
-    val cantUseCommand: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "You cant use this command")
-        )
-    ),
-    val alreadyBotStopped: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Bot already stopped")
-        )
-    ),
-    val currentTrackInfo: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Current playing track info")
-        )
-    ),
-    val failedLoad: HashMap<LangCode, String> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, "Failed load with error message %s")
-        )
-    ),
-    val testCustomEmbed: HashMap<LangCode, CustomEmbedData> = HashMap(
-        mapOf(
-            Pair(LangCode.EN, CustomEmbedData())
+            Pair(LangCode.EN, CustomCommandData(name = "url", description = "Url for track"))
         )
     )
 )

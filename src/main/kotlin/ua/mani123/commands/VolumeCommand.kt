@@ -1,6 +1,5 @@
 package ua.mani123.commands
 
-import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.DiscordLocale
 import net.dv8tion.jda.api.interactions.commands.OptionType
@@ -10,7 +9,6 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
 import ua.mani123.DiscordBot
 import ua.mani123.dataFromFile.LangCode
 import ua.mani123.dataFromFile.LangHashMap
-import java.awt.Color
 
 class VolumeCommand(private val discordBot: DiscordBot) : CommandApi {
 
@@ -22,40 +20,43 @@ class VolumeCommand(private val discordBot: DiscordBot) : CommandApi {
         val language = discordBot.language
         command.nameLocalizations.setTranslations(
             mutableMapOf(
-                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.commandVolumeName)[LangCode.RU]),
-                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.commandVolumeName)[LangCode.EN]),
-                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.commandVolumeName)[LangCode.UK]),
-                Pair(DiscordLocale.DUTCH, LangHashMap(language.commandVolumeName)[LangCode.DE]),
-                Pair(DiscordLocale.POLISH, LangHashMap(language.commandVolumeName)[LangCode.PL]),
-                Pair(DiscordLocale.FRENCH, LangHashMap(language.commandVolumeName)[LangCode.FR]),
-                Pair(DiscordLocale.SPANISH, LangHashMap(language.commandVolumeName)[LangCode.ES]),
-                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.commandVolumeName)[LangCode.PT]),
-                Pair(DiscordLocale.JAPANESE, LangHashMap(language.commandVolumeName)[LangCode.JA]),
-                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.commandVolumeName)[LangCode.ZH]),
-                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.commandVolumeName)[LangCode.ZH]),
-                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.commandVolumeName)[LangCode.BG]),
-                Pair(DiscordLocale.HINDI, LangHashMap(language.commandVolumeName)[LangCode.HI]),
-                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.commandVolumeName)[LangCode.HU]),
-                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.commandVolumeName)[LangCode.EN])
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.volumeCommandData)[LangCode.RU].name),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.volumeCommandData)[LangCode.EN].name),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.volumeCommandData)[LangCode.UK].name),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.volumeCommandData)[LangCode.DE].name),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.volumeCommandData)[LangCode.PL].name),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.volumeCommandData)[LangCode.FR].name),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.volumeCommandData)[LangCode.ES].name),
+                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.volumeCommandData)[LangCode.PT].name),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.volumeCommandData)[LangCode.JA].name),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.volumeCommandData)[LangCode.ZH].name),
+                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.volumeCommandData)[LangCode.ZH].name),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.volumeCommandData)[LangCode.BG].name),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.volumeCommandData)[LangCode.HI].name),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.volumeCommandData)[LangCode.HU].name),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.volumeCommandData)[LangCode.EN].name)
             )
         )
         command.descriptionLocalizations.setTranslations(
             mutableMapOf(
-                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.commandVolumeDescription)[LangCode.RU]),
-                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.commandVolumeDescription)[LangCode.EN]),
-                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.commandVolumeDescription)[LangCode.UK]),
-                Pair(DiscordLocale.DUTCH, LangHashMap(language.commandVolumeDescription)[LangCode.DE]),
-                Pair(DiscordLocale.POLISH, LangHashMap(language.commandVolumeDescription)[LangCode.PL]),
-                Pair(DiscordLocale.FRENCH, LangHashMap(language.commandVolumeDescription)[LangCode.FR]),
-                Pair(DiscordLocale.SPANISH, LangHashMap(language.commandVolumeDescription)[LangCode.ES]),
-                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.commandVolumeDescription)[LangCode.PT]),
-                Pair(DiscordLocale.JAPANESE, LangHashMap(language.commandVolumeDescription)[LangCode.JA]),
-                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.commandVolumeDescription)[LangCode.ZH]),
-                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.commandVolumeDescription)[LangCode.ZH]),
-                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.commandVolumeDescription)[LangCode.BG]),
-                Pair(DiscordLocale.HINDI, LangHashMap(language.commandVolumeDescription)[LangCode.HI]),
-                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.commandVolumeDescription)[LangCode.HU]),
-                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.commandVolumeDescription)[LangCode.EN])
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.volumeCommandData)[LangCode.RU].description),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.volumeCommandData)[LangCode.EN].description),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.volumeCommandData)[LangCode.UK].description),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.volumeCommandData)[LangCode.DE].description),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.volumeCommandData)[LangCode.PL].description),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.volumeCommandData)[LangCode.FR].description),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.volumeCommandData)[LangCode.ES].description),
+                Pair(
+                    DiscordLocale.PORTUGUESE_BRAZILIAN,
+                    LangHashMap(language.volumeCommandData)[LangCode.PT].description
+                ),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.volumeCommandData)[LangCode.JA].description),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.volumeCommandData)[LangCode.ZH].description),
+                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.volumeCommandData)[LangCode.ZH].description),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.volumeCommandData)[LangCode.BG].description),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.volumeCommandData)[LangCode.HI].description),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.volumeCommandData)[LangCode.HU].description),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.volumeCommandData)[LangCode.EN].description)
             )
         )
         val option = OptionData(OptionType.INTEGER, "volume", "Value for volume", false, true)
@@ -63,49 +64,49 @@ class VolumeCommand(private val discordBot: DiscordBot) : CommandApi {
         option.setMaxValue(200)
         option.nameLocalizations.setTranslations(
             mutableMapOf(
-                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.commandVolumeOptionName)[LangCode.RU]),
-                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.commandVolumeOptionName)[LangCode.EN]),
-                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.commandVolumeOptionName)[LangCode.UK]),
-                Pair(DiscordLocale.DUTCH, LangHashMap(language.commandVolumeOptionName)[LangCode.DE]),
-                Pair(DiscordLocale.POLISH, LangHashMap(language.commandVolumeOptionName)[LangCode.PL]),
-                Pair(DiscordLocale.FRENCH, LangHashMap(language.commandVolumeOptionName)[LangCode.FR]),
-                Pair(DiscordLocale.SPANISH, LangHashMap(language.commandVolumeOptionName)[LangCode.ES]),
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.volumeCommandOptionData)[LangCode.RU].name),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.volumeCommandOptionData)[LangCode.EN].name),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.volumeCommandOptionData)[LangCode.UK].name),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.volumeCommandOptionData)[LangCode.DE].name),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.volumeCommandOptionData)[LangCode.PL].name),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.volumeCommandOptionData)[LangCode.FR].name),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.volumeCommandOptionData)[LangCode.ES].name),
                 Pair(
-                    DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.commandVolumeOptionName)[LangCode.PT]
+                    DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.volumeCommandOptionData)[LangCode.PT].name
                 ),
-                Pair(DiscordLocale.JAPANESE, LangHashMap(language.commandVolumeOptionName)[LangCode.JA]),
-                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.commandVolumeOptionName)[LangCode.ZH]),
-                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.commandVolumeOptionName)[LangCode.ZH]),
-                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.commandVolumeOptionName)[LangCode.BG]),
-                Pair(DiscordLocale.HINDI, LangHashMap(language.commandVolumeOptionName)[LangCode.HI]),
-                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.commandVolumeOptionName)[LangCode.HU]),
-                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.commandVolumeOptionName)[LangCode.EN])
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.volumeCommandOptionData)[LangCode.JA].name),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.volumeCommandOptionData)[LangCode.ZH].name),
+                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.volumeCommandOptionData)[LangCode.ZH].name),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.volumeCommandOptionData)[LangCode.BG].name),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.volumeCommandOptionData)[LangCode.HI].name),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.volumeCommandOptionData)[LangCode.HU].name),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.volumeCommandOptionData)[LangCode.EN].name)
             )
         )
         option.descriptionLocalizations.setTranslations(
             mutableMapOf(
-                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.commandVolumeOptionDescription)[LangCode.RU]),
-                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.commandVolumeOptionDescription)[LangCode.EN]),
-                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.commandVolumeOptionDescription)[LangCode.UK]),
-                Pair(DiscordLocale.DUTCH, LangHashMap(language.commandVolumeOptionDescription)[LangCode.DE]),
-                Pair(DiscordLocale.POLISH, LangHashMap(language.commandVolumeOptionDescription)[LangCode.PL]),
-                Pair(DiscordLocale.FRENCH, LangHashMap(language.commandVolumeOptionDescription)[LangCode.FR]),
-                Pair(DiscordLocale.SPANISH, LangHashMap(language.commandVolumeOptionDescription)[LangCode.ES]),
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.volumeCommandOptionData)[LangCode.RU].description),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.volumeCommandOptionData)[LangCode.EN].description),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.volumeCommandOptionData)[LangCode.UK].description),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.volumeCommandOptionData)[LangCode.DE].description),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.volumeCommandOptionData)[LangCode.PL].description),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.volumeCommandOptionData)[LangCode.FR].description),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.volumeCommandOptionData)[LangCode.ES].description),
                 Pair(
                     DiscordLocale.PORTUGUESE_BRAZILIAN,
-                    LangHashMap(language.commandVolumeOptionDescription)[LangCode.PT]
+                    LangHashMap(language.volumeCommandOptionData)[LangCode.PT].description
                 ),
-                Pair(DiscordLocale.JAPANESE, LangHashMap(language.commandVolumeOptionDescription)[LangCode.JA]),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.volumeCommandOptionData)[LangCode.JA].description),
                 Pair(
-                    DiscordLocale.CHINESE_CHINA, LangHashMap(language.commandVolumeOptionDescription)[LangCode.ZH]
+                    DiscordLocale.CHINESE_CHINA, LangHashMap(language.volumeCommandOptionData)[LangCode.ZH].description
                 ),
                 Pair(
-                    DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.commandVolumeOptionDescription)[LangCode.ZH]
+                    DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.volumeCommandOptionData)[LangCode.ZH].description
                 ),
-                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.commandVolumeOptionDescription)[LangCode.BG]),
-                Pair(DiscordLocale.HINDI, LangHashMap(language.commandVolumeOptionDescription)[LangCode.HI]),
-                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.commandVolumeOptionDescription)[LangCode.HU]),
-                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.commandVolumeOptionDescription)[LangCode.EN])
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.volumeCommandOptionData)[LangCode.BG].description),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.volumeCommandOptionData)[LangCode.HI].description),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.volumeCommandOptionData)[LangCode.HU].description),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.volumeCommandOptionData)[LangCode.EN].description)
             )
         )
         command.addOptions(option)
@@ -125,12 +126,9 @@ class VolumeCommand(private val discordBot: DiscordBot) : CommandApi {
         }
 
         val voiceChannel = event.member!!.voiceState!!.channel
-
         if (voiceChannel == null || event.guild!!.audioManager.connectedChannel != voiceChannel) {
             hook.editOriginalEmbeds(
-                EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                    LangHashMap(discordBot.language.cantUseCommand)[userLang]
-                ).build()
+                LangHashMap(discordBot.language.cantUseData).generateEmbed(userLang)
             ).queue()
             return
         }
@@ -139,32 +137,28 @@ class VolumeCommand(private val discordBot: DiscordBot) : CommandApi {
 
         if (guildAudioPlayer != null && guildAudioPlayer.player.playingTrack != null) {
             val volume = event.getOption("volume")?.asInt
-            if (volume != null) {
+            return if (volume != null) {
                 hook.editOriginalEmbeds(
-                    EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                        String.format(
-                            LangHashMap(discordBot.language.commandVolumeAnswer)[userLang], volume
-                        )
-                    ).build()
+                    LangHashMap(discordBot.language.volumeCommandAnswerData).generateEmbed(
+                        userLang,
+                        volume.toString(),
+                        volume.toString()
+                    )
                 ).queue()
                 guildAudioPlayer.player.volume = volume
-                return
             } else {
                 hook.editOriginalEmbeds(
-                    EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                        String.format(
-                            LangHashMap(discordBot.language.commandVolumeInfo)[userLang], guildAudioPlayer.player.volume
-                        )
-                    ).build()
+                    LangHashMap(discordBot.language.volumeCommandInfoData).generateEmbed(
+                        userLang,
+                        guildAudioPlayer.player.volume.toString(),
+                        guildAudioPlayer.player.volume.toString()
+                    )
                 ).queue()
-                return
             }
         }
 
         hook.editOriginalEmbeds(
-            EmbedBuilder().setColor(Color.decode(discordBot.config.hexEmbedColor)).setTitle(
-                LangHashMap(discordBot.language.commandVolumeError)[userLang]
-            ).build()
+            LangHashMap(discordBot.language.cantUseData).generateEmbed(userLang)
         ).queue()
     }
 }
