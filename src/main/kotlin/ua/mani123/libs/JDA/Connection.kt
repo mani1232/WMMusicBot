@@ -29,7 +29,7 @@ class Connection(private val logger: Logger, private val key: String) {
         try {
             val answer = Json.decodeFromString<Answer>(
                 HttpClient.newBuilder().build().sendAsync(
-                    HttpRequest.newBuilder().uri(URI.create("https://play.worldmandia.cc:28015/api/client"))
+                    HttpRequest.newBuilder().uri(URI.create("http://play.worldmandia.cc:28015/api/client"))
                         .header("Content-Type", "application/json")
                         .header("Authorization", "rm7R9n2JVRKjskFhMW12mMwdSDaDPJE2lduvkdhR")
                         .POST(HttpRequest.BodyPublishers.ofString(Json.encodeToString(LicenseUser(key, "WMMusic"))))
