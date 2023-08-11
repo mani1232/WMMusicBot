@@ -1,7 +1,7 @@
 package ua.mani123.init
 
 import com.jcabi.manifests.Manifests
-import ua.mani123.DiscordBot
+import ua.mani123.libs.JDA.DiscordBot
 
 fun main() {
     println("Info: start ${Manifests.read("Main-Class")}, version: ${Manifests.read("Specification-Version")}")

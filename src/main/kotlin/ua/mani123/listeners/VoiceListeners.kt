@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.StageChannel
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceUpdateEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
-import ua.mani123.DiscordBot
+import ua.mani123.libs.JDA.DiscordBot
 
 class VoiceListeners(private val discordBot: DiscordBot) : ListenerAdapter() {
 

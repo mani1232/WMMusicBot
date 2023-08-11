@@ -59,7 +59,7 @@ tasks.shadowJar {
                 "Implementation-Title" to projectName,
                 "Implementation-Version" to version,
                 "Implementation-Vendor" to "WorldMandia",
-                "Main-Class" to "ua.mani123.MainKt"
+                "Main-Class" to "ua.mani123.init.MainKt"
             )
         )
     }

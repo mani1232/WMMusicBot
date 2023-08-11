@@ -1,4 +1,4 @@
-package ua.mani123
+package ua.mani123.libs.JDA
 
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
@@ -21,7 +21,6 @@ import ua.mani123.dataFromFile.ConfigUtils
 import ua.mani123.dataFromFile.data.ConfigData
 import ua.mani123.dataFromFile.data.LanguageData
 import ua.mani123.dataFromFile.data.StatsData
-import ua.mani123.libs.JDA.Connection
 import ua.mani123.listeners.*
 import java.lang.reflect.Method
 import java.util.*
