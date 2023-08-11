@@ -42,13 +42,13 @@ tasks.test {
 }
 
 tasks.shadowJar {
-    relocate("com.tcoded.folialib", "ua.mani123.folialib")
-    relocate("com.jcabi", "ua.mani123.jcabi-manifests")
-    relocate("com.charleskorn.kaml", "ua.mani123.kaml")
-    relocate("dev.arbjerg", "ua.mani123.lavaplayer")
-    relocate("com.github.discord-jda", "ua.mani123.JDA")
-    relocate("commons-codec", "ua.mani123.commons-codec")
-    relocate("org.bstats", "ua.mani123.bstats-base")
+    relocate("com.tcoded.folialib", "ua.mani123.libs.folialib")
+    relocate("com.jcabi", "ua.mani123.libs.jcabi-manifests")
+    relocate("com.charleskorn.kaml", "ua.mani123.libs.kaml")
+    relocate("dev.arbjerg", "ua.mani123.libs.lavaplayer")
+    relocate("com.github.discord-jda", "ua.mani123.libs.JDA")
+    relocate("commons-codec", "ua.mani123.libs.commons-codec")
+    relocate("org.bstats", "ua.mani123.libs.bstats-base")
 
     manifest {
         attributes(

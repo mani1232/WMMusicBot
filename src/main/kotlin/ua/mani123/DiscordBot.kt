@@ -21,7 +21,7 @@ import ua.mani123.dataFromFile.ConfigUtils
 import ua.mani123.dataFromFile.data.ConfigData
 import ua.mani123.dataFromFile.data.LanguageData
 import ua.mani123.dataFromFile.data.StatsData
-import ua.mani123.kaml.Connection
+import ua.mani123.libs.JDA.Connection
 import ua.mani123.listeners.*
 import java.lang.reflect.Method
 import java.util.*
@@ -47,9 +47,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
         can = Connection(logger, config.botLicense).testConnection()
         language = ConfigUtils(logger).loadFile(languagePath, LanguageData())
         stats = ConfigUtils(logger).loadFile(statsPath, StatsData())
-        if (!can) {
-            exitProcess(0)
-        }
+        if (!can) exitProcess(0)
         commands = mutableSetOf(
             CurrentCommand(this),
             PlayCommand(this),

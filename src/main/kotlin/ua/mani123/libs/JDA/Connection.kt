@@ -1,4 +1,4 @@
-package ua.mani123.kaml
+package ua.mani123.libs.JDA
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString

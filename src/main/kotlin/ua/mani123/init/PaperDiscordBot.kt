@@ -1,7 +1,8 @@
-package ua.mani123
+package ua.mani123.init
 
 import com.tcoded.folialib.FoliaLib
 import org.bukkit.plugin.java.JavaPlugin
+import ua.mani123.DiscordBot
 
 
 class PaperDiscordBot : JavaPlugin() {
