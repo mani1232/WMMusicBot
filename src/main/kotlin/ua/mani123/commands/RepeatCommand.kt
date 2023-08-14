@@ -107,8 +107,8 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.repeatCommandOptionOneData)[LangCode.EN].description)
             )
         )
-        val optionTwo = OptionData(OptionType.BOOLEAN, "add_track", "Add current playing track in repeat queue", false)
-        optionOne.nameLocalizations.setTranslations(
+        val optionTwo = OptionData(OptionType.BOOLEAN, "add-track", "Add current playing track in repeat queue", false)
+        optionTwo.nameLocalizations.setTranslations(
             mutableMapOf(
                 Pair(DiscordLocale.RUSSIAN, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.RU].name),
                 Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.EN].name),
@@ -129,7 +129,7 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.EN].name)
             )
         )
-        optionOne.descriptionLocalizations.setTranslations(
+        optionTwo.descriptionLocalizations.setTranslations(
             mutableMapOf(
                 Pair(DiscordLocale.RUSSIAN, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.RU].description),
                 Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.EN].description),
@@ -155,8 +155,7 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.EN].description)
             )
         )
-        command.addOptions(optionOne)
-        command.addOptions(optionTwo)
+        command.addOptions(optionOne, optionTwo)
     }
 
     override fun getCommandData(): SlashCommandData {
@@ -185,7 +184,7 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
         if (guildAudioPlayer != null && guildAudioPlayer.player.playingTrack != null) {
             val status = event.getOption("status")?.asBoolean
             if (status != null) {
-                if (event.getOption("add_track") != null && event.getOption("add_track")!!.asBoolean) {
+                if (event.getOption("add-track") != null && event.getOption("add-track")!!.asBoolean) {
                     guildAudioPlayer.scheduler.queue.add(guildAudioPlayer.player.playingTrack.makeClone())
                 }
                 guildAudioPlayer.repeat = status
