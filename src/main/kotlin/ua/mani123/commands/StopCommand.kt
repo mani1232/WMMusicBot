@@ -87,6 +87,7 @@ class StopCommand(private val discordBot: DiscordBot) : CommandApi {
                 LangHashMap(discordBot.language.stopCommandAnswerData).generateEmbed(userLang)
             ).queue()
             guildAudioPlayer.player.destroy()
+            guildAudioPlayer.scheduler.queue.clear()
             //discordBot.musicManagers.remove(event.guild!!.id.toLong())
             event.guild!!.audioManager.closeAudioConnection()
             return

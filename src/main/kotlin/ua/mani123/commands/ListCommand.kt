@@ -129,6 +129,14 @@ class ListCommand(private val discordBot: DiscordBot) : CommandApi {
         val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, false)
 
         if (guildAudioPlayer != null) {
+
+            if (guildAudioPlayer.scheduler.queue.isEmpty()) {
+                hook.editOriginalEmbeds(
+                    LangHashMap(discordBot.language.emptyQueueData).generateEmbed(userLang)
+                ).queue()
+                return
+            }
+
             var list = ""
             if (guildAudioPlayer.scheduler.queue.isNotEmpty()) {
                 list = buildString {
