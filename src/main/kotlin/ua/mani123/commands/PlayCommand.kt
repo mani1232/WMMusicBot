@@ -66,7 +66,7 @@ class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.playCommandData)[LangCode.EN].description)
             )
         )
-        val option = OptionData(OptionType.STRING, "url", "Url for track", true)
+        val option = OptionData(OptionType.STRING, "url", "Url for track", false)
         option.nameLocalizations.setTranslations(
             mutableMapOf(
                 Pair(DiscordLocale.RUSSIAN, LangHashMap(language.playCommandOptionData)[LangCode.RU].name),
@@ -150,14 +150,26 @@ class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
             return
         }
 
-        audioManager.openAudioConnection(voiceChannel)
+        if (event.getOption("url") != null) {
+            audioManager.openAudioConnection(voiceChannel)
 
-        val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, true)
+            val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, true)
 
-        discordBot.playerManager.loadItemOrdered(
-            guildAudioPlayer,
-            event.getOption("url")!!.asString,
-            AudioLoadResultListener(event, discordBot, userLang, guildAudioPlayer!!)
-        )
+            discordBot.playerManager.loadItemOrdered(
+                guildAudioPlayer,
+                event.getOption("url")!!.asString,
+                AudioLoadResultListener(event, discordBot, userLang, guildAudioPlayer!!)
+            )
+        } else {
+            val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, false)
+            if (guildAudioPlayer != null && guildAudioPlayer.scheduler.queue.isNotEmpty()) {
+                audioManager.openAudioConnection(voiceChannel)
+                guildAudioPlayer.scheduler.nextTrack(guildAudioPlayer.repeat)
+            } else {
+                hook.editOriginalEmbeds(
+                    LangHashMap(discordBot.language.emptyQueueData).generateEmbed(userLang)
+                ).queue()
+            }
+        }
     }
 }
