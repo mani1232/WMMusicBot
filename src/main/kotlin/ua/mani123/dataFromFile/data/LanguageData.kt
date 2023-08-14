@@ -30,6 +30,11 @@ data class LanguageData(
             Pair(LangCode.EN, CustomEmbedData(title = "You cant use this command"))
         )
     ),
+    val repeatCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
+        mapOf(
+            Pair(LangCode.EN, CustomEmbedData(title = "Repeat is: %s"))
+        )
+    ),
     val pauseCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
             Pair(LangCode.EN, CustomEmbedData(title = "Player paused: %s"))
@@ -122,6 +127,21 @@ data class LanguageData(
     val skipCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
             Pair(LangCode.EN, CustomCommandData(name = "skip", description = "Skip current track"))
+        )
+    ),
+    val repeatCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
+        mapOf(
+            Pair(LangCode.EN, CustomCommandData(name = "repeat", description = "Enable repeat mode"))
+        )
+    ),
+    val repeatCommandOptionOneData: HashMap<LangCode, CustomCommandData> = HashMap(
+        mapOf(
+            Pair(LangCode.EN, CustomCommandData(name = "status", description = "Enable or disable repeat mode"))
+        )
+    ),
+    val repeatCommandOptionTwoData: HashMap<LangCode, CustomCommandData> = HashMap(
+        mapOf(
+            Pair(LangCode.EN, CustomCommandData(name = "add_track", description = "Add current playing track in repeat queue"))
         )
     ),
     val volumeCommandData: HashMap<LangCode, CustomCommandData> = HashMap(

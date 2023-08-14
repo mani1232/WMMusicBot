@@ -53,6 +53,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
             SkipCommand(this),
             StopCommand(this),
             VolumeCommand(this),
+            RepeatCommand(this),
             ListCommand(this),
             PauseCommand(this)
         )

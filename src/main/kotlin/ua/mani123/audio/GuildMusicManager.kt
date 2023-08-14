@@ -9,6 +9,7 @@ class GuildMusicManager(manager: AudioPlayerManager, discordBot: DiscordBot) {
 
     val player: AudioPlayer = manager.createPlayer()
     val scheduler: TrackScheduler = TrackScheduler(player, discordBot)
+    var repeat = false
 
     init {
         player.addListener(scheduler)

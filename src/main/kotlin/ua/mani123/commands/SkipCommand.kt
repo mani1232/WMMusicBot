@@ -4,9 +4,9 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.DiscordLocale
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
-import ua.mani123.libs.JDA.DiscordBot
 import ua.mani123.dataFromFile.LangCode
 import ua.mani123.dataFromFile.LangHashMap
+import ua.mani123.libs.JDA.DiscordBot
 
 class SkipCommand(private val discordBot: DiscordBot) : CommandApi {
 
@@ -85,7 +85,7 @@ class SkipCommand(private val discordBot: DiscordBot) : CommandApi {
 
 
         if (guildAudioPlayer != null) {
-            val hasNextTrack = guildAudioPlayer.scheduler.nextTrack()
+            val hasNextTrack = guildAudioPlayer.scheduler.nextTrack(guildAudioPlayer.repeat)
             if (hasNextTrack) {
                 hook.editOriginalEmbeds(
                     LangHashMap(discordBot.language.skipCommandAnswerData).generateEmbed(userLang)
@@ -95,7 +95,7 @@ class SkipCommand(private val discordBot: DiscordBot) : CommandApi {
                     LangHashMap(discordBot.language.emptyQueueData).generateEmbed(userLang)
                 ).queue()
                 guildAudioPlayer.player.destroy()
-                discordBot.musicManagers.remove(event.guild!!.id.toLong())
+                //discordBot.musicManagers.remove(event.guild!!.id.toLong())
                 event.guild!!.audioManager.closeAudioConnection()
             }
             return

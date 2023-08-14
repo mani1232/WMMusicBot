@@ -1,4 +1,4 @@
-#### Release v1.0.1.0
+#### Release v1.0.1.1
 - Change yaml lib, need update configs
 - Relocate packages
 - Update dependencies
@@ -11,5 +11,6 @@
 - Added metrics bstats
 - Added comments
 - License system
+- Repeat command
 ###### Release v1.0.0.0
 - First release

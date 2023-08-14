@@ -13,7 +13,7 @@ class VoiceListeners(private val discordBot: DiscordBot) : ListenerAdapter() {
             val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild, false)
             if (guildAudioPlayer != null) {
                 guildAudioPlayer.player.destroy()
-                discordBot.musicManagers.remove(event.guild.id.toLong())
+                // discordBot.musicManagers.remove(event.guild.id.toLong())
                 event.guild.audioManager.closeAudioConnection()
             }
         }

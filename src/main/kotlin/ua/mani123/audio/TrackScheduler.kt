@@ -15,13 +15,15 @@ class TrackScheduler(private val player: AudioPlayer, private val discordBot: Di
 
     val queue: BlockingQueue<AudioTrack> = LinkedBlockingQueue()
 
-    fun queue(track: AudioTrack) {
+    fun queue(track: AudioTrack, repeat: Boolean) {
         if (!player.startTrack(track, true)) {
             queue.add(track)
+        } else if (repeat) {
+            queue.add(track.makeClone())
         }
     }
 
-    fun queue(playlist: AudioPlaylist) {
+    fun queue(playlist: AudioPlaylist, repeat: Boolean) {
         var firstTrack = playlist.selectedTrack
 
         if (firstTrack == null) {
@@ -31,15 +33,18 @@ class TrackScheduler(private val player: AudioPlayer, private val discordBot: Di
         if (!player.startTrack(firstTrack, true)) {
             queue.addAll(playlist.tracks)
         } else {
-            playlist.tracks.remove(firstTrack)
+            if (!repeat) {
+                playlist.tracks.remove(firstTrack)
+            }
             queue.addAll(playlist.tracks)
         }
     }
 
-    fun nextTrack(): Boolean {
+    fun nextTrack(repeat: Boolean): Boolean {
         val track = queue.poll()
         return if (track != null) {
             player.startTrack(track, false)
+            if (repeat) queue.add(track.makeClone())
             true
         } else {
             false
@@ -59,11 +64,13 @@ class TrackScheduler(private val player: AudioPlayer, private val discordBot: Di
     }
 
     override fun onTrackEnd(player: AudioPlayer, track: AudioTrack, endReason: AudioTrackEndReason) {
-        if (endReason.mayStartNext && !nextTrack()) {
+        if (endReason.mayStartNext) {
             discordBot.musicManagers.filter { it.value.player == player }.firstNotNullOf {
-                discordBot.jda.getGuildById(it.key)!!.audioManager.closeAudioConnection()
-                it.value.player.destroy()
-                discordBot.musicManagers.remove(it.key)
+                if (!nextTrack(it.value.repeat)) {
+                    discordBot.jda.getGuildById(it.key)!!.audioManager.closeAudioConnection()
+                    it.value.player.destroy()
+                    //discordBot.musicManagers.remove(it.key)
+                }
             }
         }
     }
