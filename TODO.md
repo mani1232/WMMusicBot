@@ -12,5 +12,7 @@
 - Added comments
 - License system
 - Repeat command
+- Update stop command
+- Disable removing temp guild data 
 ###### Release v1.0.0.0
 - First release
