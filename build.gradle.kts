@@ -23,7 +23,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
     implementation("com.charleskorn.kaml:kaml:0.55.0")
     implementation("com.github.discord-jda:JDA:master-SNAPSHOT")
-    implementation("dev.arbjerg:lavaplayer:c83450ea738c3f8153436797210c5682bb9a28b6-SNAPSHOT") {
+    implementation("dev.arbjerg:lavaplayer:862f76c2775a8d128a824c89ab96451e95f26215-SNAPSHOT") {
         exclude("commons-codec")
     }
     // https://mvnrepository.com/artifact/org.bstats/bstats-base
