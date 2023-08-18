@@ -2,7 +2,9 @@ package ua.mani123.commands
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.DiscordLocale
+import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.Commands
+import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
 import ua.mani123.dataFromFile.LangCode
 import ua.mani123.dataFromFile.LangHashMap
@@ -57,6 +59,55 @@ class StopCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.stopCommandData)[LangCode.EN].description)
             )
         )
+        val option = OptionData(OptionType.INTEGER, "clear", "Clear queue", false)
+        option.nameLocalizations.setTranslations(
+            mutableMapOf(
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.stopCommandOptionData)[LangCode.RU].name),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.stopCommandOptionData)[LangCode.EN].name),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.stopCommandOptionData)[LangCode.UK].name),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.stopCommandOptionData)[LangCode.DE].name),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.stopCommandOptionData)[LangCode.PL].name),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.stopCommandOptionData)[LangCode.FR].name),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.stopCommandOptionData)[LangCode.ES].name),
+                Pair(
+                    DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.stopCommandOptionData)[LangCode.PT].name
+                ),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.stopCommandOptionData)[LangCode.JA].name),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.stopCommandOptionData)[LangCode.ZH].name),
+                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.stopCommandOptionData)[LangCode.ZH].name),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.stopCommandOptionData)[LangCode.BG].name),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.stopCommandOptionData)[LangCode.HI].name),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.stopCommandOptionData)[LangCode.HU].name),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.stopCommandOptionData)[LangCode.EN].name)
+            )
+        )
+        option.descriptionLocalizations.setTranslations(
+            mutableMapOf(
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.stopCommandOptionData)[LangCode.RU].description),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.stopCommandOptionData)[LangCode.EN].description),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.stopCommandOptionData)[LangCode.UK].description),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.stopCommandOptionData)[LangCode.DE].description),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.stopCommandOptionData)[LangCode.PL].description),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.stopCommandOptionData)[LangCode.FR].description),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.stopCommandOptionData)[LangCode.ES].description),
+                Pair(
+                    DiscordLocale.PORTUGUESE_BRAZILIAN,
+                    LangHashMap(language.stopCommandOptionData)[LangCode.PT].description
+                ),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.stopCommandOptionData)[LangCode.JA].description),
+                Pair(
+                    DiscordLocale.CHINESE_CHINA, LangHashMap(language.stopCommandOptionData)[LangCode.ZH].description
+                ),
+                Pair(
+                    DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.stopCommandOptionData)[LangCode.ZH].description
+                ),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.stopCommandOptionData)[LangCode.BG].description),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.stopCommandOptionData)[LangCode.HI].description),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.stopCommandOptionData)[LangCode.HU].description),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.stopCommandOptionData)[LangCode.EN].description)
+            )
+        )
+        command.addOptions(option)
     }
 
     override fun getCommandData(): SlashCommandData {
@@ -87,7 +138,9 @@ class StopCommand(private val discordBot: DiscordBot) : CommandApi {
                 LangHashMap(discordBot.language.stopCommandAnswerData).generateEmbed(userLang)
             ).queue()
             guildAudioPlayer.player.destroy()
-            guildAudioPlayer.scheduler.queue.clear()
+            if (event.getOption("clear") == null || event.getOption("clear")!!.asBoolean) {
+                guildAudioPlayer.scheduler.queue.clear()
+            }
             //discordBot.musicManagers.remove(event.guild!!.id.toLong())
             event.guild!!.audioManager.closeAudioConnection()
             return

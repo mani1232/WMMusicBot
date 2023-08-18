@@ -119,6 +119,11 @@ data class LanguageData(
             )
         )
     ),
+    val stopCommandOptionData: HashMap<LangCode, CustomCommandData> = HashMap(
+        mapOf(
+            Pair(LangCode.EN, CustomCommandData(name = "clear", description = "Clear queue"))
+        )
+    ),
     val pauseCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
             Pair(LangCode.EN, CustomCommandData(name = "pause", description = "Pause track"))
