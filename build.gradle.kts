@@ -63,7 +63,7 @@ tasks.shadowJar {
             )
         )
     }
-    archiveFileName.set("$projectName-$version.jar")
+    archiveFileName.set("$projectName-$version-all.jar")
 }
 
 kotlin {
