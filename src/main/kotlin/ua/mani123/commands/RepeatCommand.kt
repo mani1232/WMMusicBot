@@ -70,7 +70,8 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.FRENCH, LangHashMap(language.repeatCommandOptionOneData)[LangCode.FR].name),
                 Pair(DiscordLocale.SPANISH, LangHashMap(language.repeatCommandOptionOneData)[LangCode.ES].name),
                 Pair(
-                    DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.repeatCommandOptionOneData)[LangCode.PT].name
+                    DiscordLocale.PORTUGUESE_BRAZILIAN,
+                    LangHashMap(language.repeatCommandOptionOneData)[LangCode.PT].name
                 ),
                 Pair(DiscordLocale.JAPANESE, LangHashMap(language.repeatCommandOptionOneData)[LangCode.JA].name),
                 Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.repeatCommandOptionOneData)[LangCode.ZH].name),
@@ -84,8 +85,14 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
         optionOne.descriptionLocalizations.setTranslations(
             mutableMapOf(
                 Pair(DiscordLocale.RUSSIAN, LangHashMap(language.repeatCommandOptionOneData)[LangCode.RU].description),
-                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.repeatCommandOptionOneData)[LangCode.EN].description),
-                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.repeatCommandOptionOneData)[LangCode.UK].description),
+                Pair(
+                    DiscordLocale.ENGLISH_US,
+                    LangHashMap(language.repeatCommandOptionOneData)[LangCode.EN].description
+                ),
+                Pair(
+                    DiscordLocale.UKRAINIAN,
+                    LangHashMap(language.repeatCommandOptionOneData)[LangCode.UK].description
+                ),
                 Pair(DiscordLocale.DUTCH, LangHashMap(language.repeatCommandOptionOneData)[LangCode.DE].description),
                 Pair(DiscordLocale.POLISH, LangHashMap(language.repeatCommandOptionOneData)[LangCode.PL].description),
                 Pair(DiscordLocale.FRENCH, LangHashMap(language.repeatCommandOptionOneData)[LangCode.FR].description),
@@ -96,15 +103,26 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
                 ),
                 Pair(DiscordLocale.JAPANESE, LangHashMap(language.repeatCommandOptionOneData)[LangCode.JA].description),
                 Pair(
-                    DiscordLocale.CHINESE_CHINA, LangHashMap(language.repeatCommandOptionOneData)[LangCode.ZH].description
+                    DiscordLocale.CHINESE_CHINA,
+                    LangHashMap(language.repeatCommandOptionOneData)[LangCode.ZH].description
                 ),
                 Pair(
-                    DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.repeatCommandOptionOneData)[LangCode.ZH].description
+                    DiscordLocale.CHINESE_TAIWAN,
+                    LangHashMap(language.repeatCommandOptionOneData)[LangCode.ZH].description
                 ),
-                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.repeatCommandOptionOneData)[LangCode.BG].description),
+                Pair(
+                    DiscordLocale.BULGARIAN,
+                    LangHashMap(language.repeatCommandOptionOneData)[LangCode.BG].description
+                ),
                 Pair(DiscordLocale.HINDI, LangHashMap(language.repeatCommandOptionOneData)[LangCode.HI].description),
-                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.repeatCommandOptionOneData)[LangCode.HU].description),
-                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.repeatCommandOptionOneData)[LangCode.EN].description)
+                Pair(
+                    DiscordLocale.HUNGARIAN,
+                    LangHashMap(language.repeatCommandOptionOneData)[LangCode.HU].description
+                ),
+                Pair(
+                    DiscordLocale.ENGLISH_UK,
+                    LangHashMap(language.repeatCommandOptionOneData)[LangCode.EN].description
+                )
             )
         )
         val optionTwo = OptionData(OptionType.BOOLEAN, "add-track", "Add current playing track in repeat queue", false)
@@ -118,7 +136,8 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.FRENCH, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.FR].name),
                 Pair(DiscordLocale.SPANISH, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.ES].name),
                 Pair(
-                    DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.PT].name
+                    DiscordLocale.PORTUGUESE_BRAZILIAN,
+                    LangHashMap(language.repeatCommandOptionTwoData)[LangCode.PT].name
                 ),
                 Pair(DiscordLocale.JAPANESE, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.JA].name),
                 Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.ZH].name),
@@ -132,8 +151,14 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
         optionTwo.descriptionLocalizations.setTranslations(
             mutableMapOf(
                 Pair(DiscordLocale.RUSSIAN, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.RU].description),
-                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.EN].description),
-                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.UK].description),
+                Pair(
+                    DiscordLocale.ENGLISH_US,
+                    LangHashMap(language.repeatCommandOptionTwoData)[LangCode.EN].description
+                ),
+                Pair(
+                    DiscordLocale.UKRAINIAN,
+                    LangHashMap(language.repeatCommandOptionTwoData)[LangCode.UK].description
+                ),
                 Pair(DiscordLocale.DUTCH, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.DE].description),
                 Pair(DiscordLocale.POLISH, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.PL].description),
                 Pair(DiscordLocale.FRENCH, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.FR].description),
@@ -144,15 +169,26 @@ class RepeatCommand(private val discordBot: DiscordBot) : CommandApi {
                 ),
                 Pair(DiscordLocale.JAPANESE, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.JA].description),
                 Pair(
-                    DiscordLocale.CHINESE_CHINA, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.ZH].description
+                    DiscordLocale.CHINESE_CHINA,
+                    LangHashMap(language.repeatCommandOptionTwoData)[LangCode.ZH].description
                 ),
                 Pair(
-                    DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.ZH].description
+                    DiscordLocale.CHINESE_TAIWAN,
+                    LangHashMap(language.repeatCommandOptionTwoData)[LangCode.ZH].description
                 ),
-                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.BG].description),
+                Pair(
+                    DiscordLocale.BULGARIAN,
+                    LangHashMap(language.repeatCommandOptionTwoData)[LangCode.BG].description
+                ),
                 Pair(DiscordLocale.HINDI, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.HI].description),
-                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.HU].description),
-                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.repeatCommandOptionTwoData)[LangCode.EN].description)
+                Pair(
+                    DiscordLocale.HUNGARIAN,
+                    LangHashMap(language.repeatCommandOptionTwoData)[LangCode.HU].description
+                ),
+                Pair(
+                    DiscordLocale.ENGLISH_UK,
+                    LangHashMap(language.repeatCommandOptionTwoData)[LangCode.EN].description
+                )
             )
         )
         command.addOptions(optionOne, optionTwo)

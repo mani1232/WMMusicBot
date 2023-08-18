@@ -146,7 +146,10 @@ data class LanguageData(
     ),
     val repeatCommandOptionTwoData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
-            Pair(LangCode.EN, CustomCommandData(name = "add-track", description = "Add current playing track in repeat queue"))
+            Pair(
+                LangCode.EN,
+                CustomCommandData(name = "add-track", description = "Add current playing track in repeat queue")
+            )
         )
     ),
     val volumeCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
