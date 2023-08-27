@@ -16,5 +16,15 @@ data class ConfigData(
     @YamlComment("Writing in console message with info if user used any command")
     val debugCommandUsage: Boolean = false,
     @YamlComment("Use local files?")
-    val enableLocalSource: Boolean = false
-)
+    val enableLocalSource: Boolean = false,
+    @YamlComment("Spotify settings")
+    val spotify: Spotify = Spotify()
+) {
+    @Serializable
+    data class Spotify(
+        val enable: Boolean = false,
+        val clientId: String = "CHANGE_HERE",
+        val clientSecret: String = "CHANGE_HERE",
+        val countryCode: String = "UA"
+    )
+}

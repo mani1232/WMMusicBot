@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
-    kotlin("plugin.serialization") version "1.9.0"
+    kotlin("jvm") version "1.9.10"
+    kotlin("plugin.serialization") version "1.9.10"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
@@ -10,6 +10,7 @@ val projectName = findProperty("projectName")!!
 
 repositories {
     mavenCentral()
+    maven("https://maven.topi.wtf/releases")
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://jitpack.io/")
     maven("https://maven.arbjerg.dev/snapshots")
@@ -23,15 +24,16 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
     implementation("com.charleskorn.kaml:kaml:0.55.0")
     implementation("com.github.discord-jda:JDA:master-SNAPSHOT")
-    implementation("dev.arbjerg:lavaplayer:862f76c2775a8d128a824c89ab96451e95f26215-SNAPSHOT") {
+    implementation("dev.arbjerg:lavaplayer:9c92cf39faedd5218b7e086e8ece13a21bff2f0a-SNAPSHOT") {
         exclude("commons-codec")
     }
+    implementation("com.github.topi314.lavasrc:lavasrc:3f26e2e")
     // https://mvnrepository.com/artifact/org.bstats/bstats-base
     implementation("org.bstats:bstats-base:3.0.2")
     implementation("commons-codec:commons-codec:1.16.0")
     implementation("com.jcabi:jcabi-manifests:2.1.0")
     //implementation("dev.arbjerg:lavaplayer:2.0.0")
-    implementation("ch.qos.logback:logback-classic:1.4.8")
+    implementation("ch.qos.logback:logback-classic:1.4.11")
     implementation("com.tcoded:FoliaLib:0.2.0")
 
     testImplementation(kotlin("test"))

@@ -23,6 +23,26 @@ class AutoCompleteListener(private val discordBot: DiscordBot) : ListenerAdapter
                     )
                 }
             event.replyChoices(options).queue()
+        } else if (event.name == "next" && event.focusedOption.name == "next") {
+            val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, false)
+            if (guildAudioPlayer != null && guildAudioPlayer.player.playingTrack != null) {
+
+                val options: List<Command.Choice> = mutableListOf(
+                    "${(guildAudioPlayer.player.playingTrack.position / 1000)} min",
+                    "${(guildAudioPlayer.player.playingTrack.duration / 1000)} max"
+                ).filter { word ->
+                    word.startsWith(
+                        event.focusedOption.value
+                    )
+                }
+                    .map { word ->
+                        Command.Choice(
+                            word,
+                            word
+                        )
+                    }
+                event.replyChoices(options).queue()
+            }
         }
     }
 }

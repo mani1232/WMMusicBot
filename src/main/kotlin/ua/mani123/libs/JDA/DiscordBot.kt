@@ -1,5 +1,6 @@
 package ua.mani123.libs.JDA
 
+import com.github.topi314.lavasrc.spotify.SpotifySourceManager
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
 import net.dv8tion.jda.api.entities.Guild
@@ -74,6 +75,17 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
                     AutoCompleteListener(this),
                     VoiceListeners(this)
                 ).build()
+            if (config.spotify.enable) {
+                playerManager.registerSourceManager(
+                    SpotifySourceManager(
+                        null,
+                        config.spotify.clientId,
+                        config.spotify.clientSecret,
+                        config.spotify.countryCode,
+                        playerManager
+                    )
+                )
+            }
             AudioSourceManagers.registerRemoteSources(playerManager)
             if (config.enableLocalSource) {
                 AudioSourceManagers.registerLocalSource(playerManager)

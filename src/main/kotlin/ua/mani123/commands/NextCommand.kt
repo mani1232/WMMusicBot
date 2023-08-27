@@ -1,0 +1,140 @@
+package ua.mani123.commands
+
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
+import net.dv8tion.jda.api.interactions.DiscordLocale
+import net.dv8tion.jda.api.interactions.commands.OptionType
+import net.dv8tion.jda.api.interactions.commands.build.Commands
+import net.dv8tion.jda.api.interactions.commands.build.OptionData
+import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
+import ua.mani123.dataFromFile.LangCode
+import ua.mani123.dataFromFile.LangHashMap
+import ua.mani123.libs.JDA.DiscordBot
+
+class NextCommand(private val discordBot: DiscordBot) : CommandApi {
+
+    private val command: SlashCommandData = Commands.slash("next", "Next in sec")
+
+    init {
+        command.setGuildOnly(true)
+        command.setNSFW(false)
+        val language = discordBot.language
+        command.nameLocalizations.setTranslations(
+            mutableMapOf(
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.listCommandData)[LangCode.RU].name),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.listCommandData)[LangCode.EN].name),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.listCommandData)[LangCode.UK].name),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.listCommandData)[LangCode.DE].name),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.listCommandData)[LangCode.PL].name),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.listCommandData)[LangCode.FR].name),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.listCommandData)[LangCode.ES].name),
+                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.listCommandData)[LangCode.PT].name),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.listCommandData)[LangCode.JA].name),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.listCommandData)[LangCode.ZH].name),
+                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.listCommandData)[LangCode.ZH].name),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.listCommandData)[LangCode.BG].name),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.listCommandData)[LangCode.HI].name),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.listCommandData)[LangCode.HU].name),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.listCommandData)[LangCode.EN].name)
+            )
+        )
+        command.descriptionLocalizations.setTranslations(
+            mutableMapOf(
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.listCommandData)[LangCode.RU].description),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.listCommandData)[LangCode.EN].description),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.listCommandData)[LangCode.UK].description),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.listCommandData)[LangCode.DE].description),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.listCommandData)[LangCode.PL].description),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.listCommandData)[LangCode.FR].description),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.listCommandData)[LangCode.ES].description),
+                Pair(
+                    DiscordLocale.PORTUGUESE_BRAZILIAN,
+                    LangHashMap(language.listCommandData)[LangCode.PT].description
+                ),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.listCommandData)[LangCode.JA].description),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.listCommandData)[LangCode.ZH].description),
+                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.listCommandData)[LangCode.ZH].description),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.listCommandData)[LangCode.BG].description),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.listCommandData)[LangCode.HI].description),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.listCommandData)[LangCode.HU].description),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.listCommandData)[LangCode.EN].description)
+            )
+        )
+        val option = OptionData(OptionType.INTEGER, "seconds", "Max tracks count in list", true, true)
+        //option.setMaxValue(10)
+        //option.setMinValue(1)
+        option.nameLocalizations.setTranslations(
+            mutableMapOf(
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.listCommandOptionData)[LangCode.RU].name),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.listCommandOptionData)[LangCode.EN].name),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.listCommandOptionData)[LangCode.UK].name),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.listCommandOptionData)[LangCode.DE].name),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.listCommandOptionData)[LangCode.PL].name),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.listCommandOptionData)[LangCode.FR].name),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.listCommandOptionData)[LangCode.ES].name),
+                Pair(DiscordLocale.PORTUGUESE_BRAZILIAN, LangHashMap(language.listCommandOptionData)[LangCode.PT].name),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.listCommandOptionData)[LangCode.JA].name),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.listCommandOptionData)[LangCode.ZH].name),
+                Pair(DiscordLocale.CHINESE_TAIWAN, LangHashMap(language.listCommandOptionData)[LangCode.ZH].name),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.listCommandOptionData)[LangCode.BG].name),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.listCommandOptionData)[LangCode.HI].name),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.listCommandOptionData)[LangCode.HU].name),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.listCommandOptionData)[LangCode.EN].name)
+            )
+        )
+        option.descriptionLocalizations.setTranslations(
+            mutableMapOf(
+                Pair(DiscordLocale.RUSSIAN, LangHashMap(language.listCommandOptionData)[LangCode.RU].description),
+                Pair(DiscordLocale.ENGLISH_US, LangHashMap(language.listCommandOptionData)[LangCode.EN].description),
+                Pair(DiscordLocale.UKRAINIAN, LangHashMap(language.listCommandOptionData)[LangCode.UK].description),
+                Pair(DiscordLocale.DUTCH, LangHashMap(language.listCommandOptionData)[LangCode.DE].description),
+                Pair(DiscordLocale.POLISH, LangHashMap(language.listCommandOptionData)[LangCode.PL].description),
+                Pair(DiscordLocale.FRENCH, LangHashMap(language.listCommandOptionData)[LangCode.FR].description),
+                Pair(DiscordLocale.SPANISH, LangHashMap(language.listCommandOptionData)[LangCode.ES].description),
+                Pair(
+                    DiscordLocale.PORTUGUESE_BRAZILIAN,
+                    LangHashMap(language.listCommandOptionData)[LangCode.PT].description
+                ),
+                Pair(DiscordLocale.JAPANESE, LangHashMap(language.listCommandOptionData)[LangCode.JA].description),
+                Pair(DiscordLocale.CHINESE_CHINA, LangHashMap(language.listCommandOptionData)[LangCode.ZH].description),
+                Pair(
+                    DiscordLocale.CHINESE_TAIWAN,
+                    LangHashMap(language.listCommandOptionData)[LangCode.ZH].description
+                ),
+                Pair(DiscordLocale.BULGARIAN, LangHashMap(language.listCommandOptionData)[LangCode.BG].description),
+                Pair(DiscordLocale.HINDI, LangHashMap(language.listCommandOptionData)[LangCode.HI].description),
+                Pair(DiscordLocale.HUNGARIAN, LangHashMap(language.listCommandOptionData)[LangCode.HU].description),
+                Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.listCommandOptionData)[LangCode.EN].description)
+            )
+        )
+        command.addOptions(option)
+    }
+
+    override fun getCommandData(): SlashCommandData {
+        return command
+    }
+
+    override fun run(event: SlashCommandInteractionEvent) {
+        val hook = event.hook
+
+        val userLang = try {
+            LangCode.valueOf(event.userLocale.locale.substring(0, 2).uppercase())
+        } catch (e: IllegalArgumentException) {
+            LangCode.EN
+        }
+
+        val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, false)
+
+        if (guildAudioPlayer != null && guildAudioPlayer.player.playingTrack != null) {
+            val sec = event.getOption("seconds")!!.asLong
+            val position = guildAudioPlayer.player.playingTrack.position
+            if (sec <= guildAudioPlayer.player.playingTrack.duration) {
+                guildAudioPlayer.player.playingTrack.position = position + sec * 1000
+            }
+            // position setted embed
+        }
+
+        hook.editOriginalEmbeds(
+            LangHashMap(discordBot.language.cantUseData).generateEmbed(userLang)
+        ).queue()
+    }
+}
