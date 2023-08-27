@@ -15,15 +15,13 @@ class AutoCompleteListener(private val discordBot: DiscordBot) : ListenerAdapter
                 word.toString().startsWith(
                     event.focusedOption.value
                 )
-            }
-                .map { word ->
+            }.map { word ->
                     Command.Choice(
-                        word.toString(),
-                        word
+                        word.toString(), word
                     )
                 }
             event.replyChoices(options).queue()
-        } else if (event.name == "next" && event.focusedOption.name == "next") {
+        } else if (event.name == "next" && event.focusedOption.name == "seconds") {
             val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, false)
             if (guildAudioPlayer != null && guildAudioPlayer.player.playingTrack != null) {
 
@@ -34,11 +32,9 @@ class AutoCompleteListener(private val discordBot: DiscordBot) : ListenerAdapter
                     word.startsWith(
                         event.focusedOption.value
                     )
-                }
-                    .map { word ->
+                }.map { word ->
                         Command.Choice(
-                            word,
-                            word
+                            word, word
                         )
                     }
                 event.replyChoices(options).queue()
