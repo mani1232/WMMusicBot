@@ -30,6 +30,11 @@ data class LanguageData(
             Pair(LangCode.EN, CustomEmbedData(title = "You cant use this command"))
         )
     ),
+    val nextCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
+        mapOf(
+            Pair(LangCode.EN, CustomEmbedData(title = "Skipped seconds, now %s (%s)"))
+        )
+    ),
     val repeatCommandAnswerData: HashMap<LangCode, CustomEmbedData> = HashMap(
         mapOf(
             Pair(LangCode.EN, CustomEmbedData(title = "Repeat is: %s"))
@@ -122,6 +127,19 @@ data class LanguageData(
     val stopCommandOptionData: HashMap<LangCode, CustomCommandData> = HashMap(
         mapOf(
             Pair(LangCode.EN, CustomCommandData(name = "clear", description = "Clear queue"))
+        )
+    ),
+    val nextCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
+        mapOf(
+            Pair(
+                LangCode.EN,
+                CustomCommandData(name = "next", description = "Rewinds the current song")
+            )
+        )
+    ),
+    val nextCommandOptionData: HashMap<LangCode, CustomCommandData> = HashMap(
+        mapOf(
+            Pair(LangCode.EN, CustomCommandData(name = "seconds", description = "How many seconds"))
         )
     ),
     val pauseCommandData: HashMap<LangCode, CustomCommandData> = HashMap(
