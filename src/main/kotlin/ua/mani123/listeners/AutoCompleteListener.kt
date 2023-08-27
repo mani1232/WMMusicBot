@@ -16,29 +16,32 @@ class AutoCompleteListener(private val discordBot: DiscordBot) : ListenerAdapter
                     event.focusedOption.value
                 )
             }.map { word ->
-                    Command.Choice(
-                        word.toString(), word
-                    )
-                }
+                Command.Choice(
+                    word.toString(), word
+                )
+            }
             event.replyChoices(options).queue()
         } else if (event.name == "next" && event.focusedOption.name == "seconds") {
+            val options = ArrayList<String>()
             val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, false)
             if (guildAudioPlayer != null && guildAudioPlayer.player.playingTrack != null) {
-
-                val options: List<Command.Choice> = mutableListOf(
-                    "${(guildAudioPlayer.player.playingTrack.position / 1000)} min",
-                    "${(guildAudioPlayer.player.playingTrack.duration / 1000)} max"
-                ).filter { word ->
-                    word.startsWith(
-                        event.focusedOption.value
+                options.addAll(
+                    listOf(
+                        "${(guildAudioPlayer.player.playingTrack.position / 1000)} min",
+                        "${(guildAudioPlayer.player.playingTrack.duration / 1000)} max"
                     )
-                }.map { word ->
-                        Command.Choice(
-                            word, word
-                        )
-                    }
-                event.replyChoices(options).queue()
+                )
             }
+            val choices: List<Command.Choice> = options.filter { word ->
+                word.startsWith(
+                    event.focusedOption.value
+                )
+            }.map { word ->
+                Command.Choice(
+                    word, word
+                )
+            }
+            event.replyChoices(choices).queue()
         }
     }
 }

@@ -59,7 +59,7 @@ class NextCommand(private val discordBot: DiscordBot) : CommandApi {
                 Pair(DiscordLocale.ENGLISH_UK, LangHashMap(language.nextCommandData)[LangCode.EN].description)
             )
         )
-        val option = OptionData(OptionType.INTEGER, "seconds", "How many seconds", true, true)
+        val option = OptionData(OptionType.STRING, "seconds", "How many seconds", true, true)
         option.nameLocalizations.setTranslations(
             mutableMapOf(
                 Pair(DiscordLocale.RUSSIAN, LangHashMap(language.nextCommandOptionData)[LangCode.RU].name),
@@ -123,7 +123,7 @@ class NextCommand(private val discordBot: DiscordBot) : CommandApi {
         val guildAudioPlayer = discordBot.getGuildAudioPlayer(event.guild!!, false)
 
         if (guildAudioPlayer != null && guildAudioPlayer.player.playingTrack != null) {
-            val sec = event.getOption("seconds")!!.asLong * 1000
+            val sec = event.getOption("seconds")!!.asString.split(" ")[0].toLong() * 1000
             val position = guildAudioPlayer.player.playingTrack.position
             if (sec <= guildAudioPlayer.player.playingTrack.duration) {
                 guildAudioPlayer.player.playingTrack.position = position + sec
