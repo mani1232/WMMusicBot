@@ -157,7 +157,7 @@ class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
 
             discordBot.playerManager.loadItemOrdered(
                 guildAudioPlayer,
-                event.getOption("url")!!.asString,
+                event.getOption("url")!!.asString.replace(" ", "%20"),
                 AudioLoadResultListener(event, discordBot, userLang, guildAudioPlayer!!)
             )
         } else {
