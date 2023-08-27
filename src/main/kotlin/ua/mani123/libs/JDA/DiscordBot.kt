@@ -35,7 +35,7 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
     lateinit var language: LanguageData
     private lateinit var stats: StatsData
     val musicManagers: MutableMap<Long, GuildMusicManager> = mutableMapOf()
-    lateinit var commands: MutableSet<CommandApi>
+    val commands: MutableSet<CommandApi> = mutableSetOf()
     private lateinit var metrics: MetricsBase
     val playerManager = DefaultAudioPlayerManager()
     private var serviceEnabled = false
@@ -47,17 +47,16 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
         can = Connection(logger, config.botLicense).testConnection()
         language = ConfigUtils(logger).loadFile(languagePath, LanguageData())
         stats = ConfigUtils(logger).loadFile(statsPath, StatsData())
+        if (config.command.current) commands.add(CurrentCommand(this))
+        if (config.command.stop) commands.add(StopCommand(this))
+        if (config.command.list) commands.add(ListCommand(this))
+        if (config.command.next) commands.add(NextCommand(this))
+        if (config.command.repeat)commands.add(RepeatCommand(this))
+        if (config.command.pause)commands.add(PauseCommand(this))
+        if (config.command.play)commands.add(PlayCommand(this))
+        if (config.command.skip)commands.add(SkipCommand(this))
         if (!can) exitProcess(0)
-        commands = mutableSetOf(
-            CurrentCommand(this),
-            PlayCommand(this),
-            SkipCommand(this),
-            StopCommand(this),
-            VolumeCommand(this),
-            RepeatCommand(this),
-            ListCommand(this),
-            PauseCommand(this)
-        )
+        if (config.command.volume)commands.add(VolumeCommand(this))
         try {
             jda = DefaultShardManagerBuilder.createLight(config.botToken).setCompression(Compression.ZLIB)
                 .setMemberCachePolicy(MemberCachePolicy.VOICE).enableCache(
