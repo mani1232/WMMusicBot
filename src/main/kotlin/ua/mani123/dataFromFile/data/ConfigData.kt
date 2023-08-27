@@ -19,6 +19,8 @@ data class ConfigData(
     val enableLocalSource: Boolean = false,
     @YamlComment("Spotify settings")
     val spotify: Spotify = Spotify(),
+    @YamlComment("FloweryTTS settings")
+    val floweryTTS: FloweryTTS = FloweryTTS(),
     @YamlComment("Commands settings")
     val command: Command = Command()
 ) {
@@ -29,6 +31,15 @@ data class ConfigData(
         val clientId: String = "CHANGE_HERE",
         val clientSecret: String = "CHANGE_HERE",
         val countryCode: String = "UA"
+    )
+
+    @Serializable
+    data class FloweryTTS(
+        val enable: Boolean = false,
+        @YamlComment("You can find more voices here: https://api.flowery.pw/v1/tts/voices")
+        val voice: String = "Lesya",
+        val translate: Boolean = false,
+        val speed: Float = 1f
     )
 
     @Serializable

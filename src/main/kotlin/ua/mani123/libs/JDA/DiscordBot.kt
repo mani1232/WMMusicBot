@@ -1,5 +1,6 @@
 package ua.mani123.libs.JDA
 
+import com.github.topi314.lavasrc.flowerytts.FloweryTTSSourceManager
 import com.github.topi314.lavasrc.spotify.SpotifySourceManager
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
@@ -83,6 +84,14 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
                         config.spotify.countryCode,
                         playerManager
                     )
+                )
+            }
+            if (config.floweryTTS.enable) {
+                val floweryTTS = FloweryTTSSourceManager(config.floweryTTS.voice)
+                floweryTTS.setTranslate(config.floweryTTS.translate)
+                floweryTTS.setSpeed(config.floweryTTS.speed)
+                playerManager.registerSourceManager(
+                    floweryTTS
                 )
             }
             AudioSourceManagers.registerRemoteSources(playerManager)
