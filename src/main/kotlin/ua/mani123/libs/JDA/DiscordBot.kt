@@ -52,12 +52,12 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
         if (config.command.stop) commands.add(StopCommand(this))
         if (config.command.list) commands.add(ListCommand(this))
         if (config.command.next) commands.add(NextCommand(this))
-        if (config.command.repeat)commands.add(RepeatCommand(this))
-        if (config.command.pause)commands.add(PauseCommand(this))
-        if (config.command.play)commands.add(PlayCommand(this))
-        if (config.command.skip)commands.add(SkipCommand(this))
+        if (config.command.repeat) commands.add(RepeatCommand(this))
+        if (config.command.pause) commands.add(PauseCommand(this))
+        if (config.command.play) commands.add(PlayCommand(this))
+        if (config.command.skip) commands.add(SkipCommand(this))
         if (!can) exitProcess(0)
-        if (config.command.volume)commands.add(VolumeCommand(this))
+        if (config.command.volume) commands.add(VolumeCommand(this))
         try {
             jda = DefaultShardManagerBuilder.createLight(config.botToken).setCompression(Compression.ZLIB)
                 .setMemberCachePolicy(MemberCachePolicy.VOICE).enableCache(

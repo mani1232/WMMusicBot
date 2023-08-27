@@ -129,7 +129,11 @@ class NextCommand(private val discordBot: DiscordBot) : CommandApi {
                 guildAudioPlayer.player.playingTrack.position = position + sec
             }
             hook.editOriginalEmbeds(
-                LangHashMap(discordBot.language.nextCommandAnswerData).generateEmbed(userLang, (guildAudioPlayer.player.playingTrack.position/1000).toString(), (guildAudioPlayer.player.playingTrack.duration/1000).toString())
+                LangHashMap(discordBot.language.nextCommandAnswerData).generateEmbed(
+                    userLang,
+                    (guildAudioPlayer.player.playingTrack.position / 1000).toString(),
+                    (guildAudioPlayer.player.playingTrack.duration / 1000).toString()
+                )
             ).queue()
             return
         }
