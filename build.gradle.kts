@@ -58,16 +58,6 @@ kotlin {
 }
 
 tasks {
-    processResources {
-        filesMatching(listOf("**plugin.yml")) {
-            expand(
-                mapOf(
-                    "projectVersion" to project.version,
-                    "projectName" to projectName
-                )
-            )
-        }
-    }
     javadoc {
         options.encoding = Charsets.UTF_8.toString()
     }

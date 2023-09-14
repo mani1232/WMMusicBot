@@ -4,8 +4,7 @@ plugins {
 }
 
 group = "ua.mani123"
-version = "1.0.0"
-val projectName = "ProductLoader"
+val projectName = "WMMusicLoader"
 
 repositories {
     mavenCentral()
@@ -50,4 +49,16 @@ tasks.shadowJar {
 
 kotlin {
     jvmToolchain(17)
+}
+
+tasks {
+    javadoc {
+        options.encoding = Charsets.UTF_8.toString()
+    }
+    compileJava {
+        options.encoding = Charsets.UTF_8.toString()
+    }
+    compileTestJava {
+        options.encoding = Charsets.UTF_8.toString()
+    }
 }
