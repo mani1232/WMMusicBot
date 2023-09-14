@@ -1,6 +1,6 @@
 name: ${projectName}
 version: '${projectVersion}'
-main: ua.mani123.init.PaperDiscordBot
+main: ua.mani123.bukkitLoader.PaperDiscordBot
 load: STARTUP
 description: WMMusic discord bot, loaded as minecraft plugin
 api-version: '1.19'

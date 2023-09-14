@@ -28,7 +28,7 @@
     </appender>
 
     <!-- Log on Info while others are on Debug -->
-    <logger name="ua.mani123.libs.JDA.DiscordBot" level="info" additivity="false">
+    <logger name="ua.mani123.DiscordBot" level="info" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </logger>

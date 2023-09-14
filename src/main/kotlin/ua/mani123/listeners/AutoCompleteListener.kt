@@ -3,7 +3,7 @@ package ua.mani123.listeners
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.interactions.commands.Command
-import ua.mani123.libs.JDA.DiscordBot
+import ua.mani123.DiscordBot
 
 
 class AutoCompleteListener(private val discordBot: DiscordBot) : ListenerAdapter() {

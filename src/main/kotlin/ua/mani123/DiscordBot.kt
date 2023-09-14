@@ -1,11 +1,10 @@
-package ua.mani123.libs.JDA
+package ua.mani123
 
 import com.github.topi314.lavasrc.flowerytts.FloweryTTSSourceManager
 import com.github.topi314.lavasrc.spotify.SpotifySourceManager
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
 import net.dv8tion.jda.api.entities.Guild
-import net.dv8tion.jda.api.exceptions.InvalidTokenException
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder
 import net.dv8tion.jda.api.sharding.ShardManager
@@ -25,12 +24,14 @@ import ua.mani123.dataFromFile.data.LanguageData
 import ua.mani123.dataFromFile.data.StatsData
 import ua.mani123.listeners.*
 import java.lang.reflect.Method
-import java.util.*
 import kotlin.system.exitProcess
 
 
-class DiscordBot(private val configPath: String, private val languagePath: String, private val statsPath: String) {
+class DiscordBot : Product {
 
+    var configPath = "/config.yml"
+    var languagePath = "/lang.yml"
+    var statsPath = "/bstats.yml"
     var logger = LoggerFactory.getLogger(this.javaClass) as Logger
     lateinit var config: ConfigData
     lateinit var language: LanguageData
@@ -41,11 +42,9 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
     val playerManager = DefaultAudioPlayerManager()
     private var serviceEnabled = false
     lateinit var jda: ShardManager
-    private var can: Boolean = false
 
     fun runBot() {
         config = ConfigUtils(logger).loadFile(configPath, ConfigData())
-        can = Connection(logger, config.botLicense).testConnection()
         language = ConfigUtils(logger).loadFile(languagePath, LanguageData())
         stats = ConfigUtils(logger).loadFile(statsPath, StatsData())
         if (config.command.current) commands.add(CurrentCommand(this))
@@ -56,7 +55,6 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
         if (config.command.pause) commands.add(PauseCommand(this))
         if (config.command.play) commands.add(PlayCommand(this))
         if (config.command.skip) commands.add(SkipCommand(this))
-        if (!can) exitProcess(0)
         if (config.command.volume) commands.add(VolumeCommand(this))
         try {
             jda = DefaultShardManagerBuilder.createLight(config.botToken).setCompression(Compression.ZLIB)
@@ -99,10 +97,9 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
                 AudioSourceManagers.registerLocalSource(playerManager)
             }
             serviceEnabled = true
-        } catch (e: InvalidTokenException) {
+        } catch (e: Exception) {
             logger.error(e.message)
-        } catch (e: IllegalArgumentException) {
-            logger.error(e.message)
+            shutdown()
         }
     }
 
@@ -155,31 +152,6 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
         }
     }
 
-    fun enableConsoleScanner() {
-        Runtime.getRuntime().addShutdownHook(Thread {
-            shutdown()
-        })
-        val scanner = Scanner(System.`in`)
-        Thread {
-            while (true) {
-                when (scanner.next()) {
-                    "/stop" -> {
-                        exitProcess(0)
-                    }
-
-                    else -> {
-                        logger.info(
-                            """
-                            <-- Command info -->
-                            /stop - Stop bot
-                        """.trimIndent()
-                        )
-                    }
-                }
-            }
-        }.start()
-    }
-
     @Synchronized
     fun shutdown() {
         logger.info("Disabling bot")
@@ -216,4 +188,18 @@ class DiscordBot(private val configPath: String, private val languagePath: Strin
         }
         return musicManager
     }
+
+    override fun enable(configPath: String, languagePath: String, statsPath: String, platform: String) {
+        this.configPath = configPath
+        this.languagePath = languagePath
+        this.statsPath = statsPath
+        runBot()
+        enableMetrics(platform, "1.0.1.0")
+    }
+
+    override fun disable() {
+        shutdown()
+        exitProcess(0)
+    }
+
 }

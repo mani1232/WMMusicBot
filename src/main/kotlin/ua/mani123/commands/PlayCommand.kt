@@ -6,10 +6,10 @@ import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
+import ua.mani123.DiscordBot
 import ua.mani123.audio.AudioLoadResultListener
 import ua.mani123.dataFromFile.LangCode
 import ua.mani123.dataFromFile.LangHashMap
-import ua.mani123.libs.JDA.DiscordBot
 
 class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
 

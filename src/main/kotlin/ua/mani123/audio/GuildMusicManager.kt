@@ -2,7 +2,7 @@ package ua.mani123.audio
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager
-import ua.mani123.libs.JDA.DiscordBot
+import ua.mani123.DiscordBot
 
 
 class GuildMusicManager(manager: AudioPlayerManager, discordBot: DiscordBot) {
