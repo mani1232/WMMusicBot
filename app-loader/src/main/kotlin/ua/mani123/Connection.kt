@@ -1,50 +1,43 @@
 package ua.mani123
 
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okio.BufferedSink
-import okio.buffer
-import okio.sink
 import java.io.File
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse.BodyHandlers
+import java.time.Duration
 import java.util.*
 
 
 class Connection(private val key: String, private val product: String) {
 
-    private var client = OkHttpClient()
-
     fun loadApp(): File {
-        val checkVersionUrl = "http://82.66.203.77:8080/$product/latest-version"
-
-        val latestVersionRequest: Request = Request.Builder()
-            .url(checkVersionUrl)
-            .get()
-            .addHeader("license-key", key)
-            .build()
-
-        var latestVersion: String
-
-        client.newCall(latestVersionRequest).execute().use { response -> latestVersion = response.body!!.string() }
-
-        val getFileUrl = "http://82.66.203.77:8080/$product/$latestVersion"
-
         val file = File("libs/$product-latest.jar")
         file.createNewFile()
 
-        val fileRequest: Request = Request.Builder()
-            .url(getFileUrl)
-            .get()
-            .addHeader("license-key", key)
-            .addHeader("hwid", getHwid())
+        val client: HttpClient = HttpClient.newBuilder()
+            .version(HttpClient.Version.HTTP_2)
+            .followRedirects(HttpClient.Redirect.NORMAL)
             .build()
 
-        client.newCall(fileRequest).execute().use { response ->
-            val source = response.body!!.source()
-            val sink: BufferedSink = file.sink().buffer()
-            sink.writeAll(source)
-            sink.close()
-        }
+        val versionRequest = HttpRequest.newBuilder()
+            .uri(URI("http://82.66.203.77:8080/$product/latest-version"))
+            .GET()
+            .header("license-key", key)
+            .timeout(Duration.ofSeconds(10))
+            .build()
 
+        val latestVersion = client.sendAsync(versionRequest, BodyHandlers.ofString()).get().body()
+
+        val fileRequest = HttpRequest.newBuilder()
+            .uri(URI("http://82.66.203.77:8080/$product/$latestVersion"))
+            .GET()
+            .header("license-key", key)
+            .header("hwid", getHwid())
+            .timeout(Duration.ofSeconds(10))
+            .build()
+
+        client.sendAsync(fileRequest, BodyHandlers.ofFile(file.toPath())).get()
         return file
     }
 
