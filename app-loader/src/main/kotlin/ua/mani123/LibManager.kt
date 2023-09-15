@@ -26,9 +26,9 @@ class LibManager {
             ).build()
 
             val result = dragonfly.load(
-                Dependency.maven("org.jetbrains.kotlin", "kotlin-annotations-jvm", "1.9.10"),
-                Dependency.maven("org.jetbrains.kotlin", "kotlin-stdlib", "1.9.10"),
-                Dependency.maven("org.jetbrains.kotlin", "kotlin-stdlib-common", "1.9.10"),
+                Dependency.maven("org.jetbrains.kotlin", "kotlin-annotations-jvm", "1.9.20-Beta"),
+                Dependency.maven("org.jetbrains.kotlin", "kotlin-stdlib", "1.9.20-Beta"),
+                Dependency.maven("org.jetbrains.kotlin", "kotlin-stdlib-common", "1.9.20-Beta"),
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-databind", "2.15.2"),
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-core", "2.15.2"),
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-annotations", "2.15.2"),
@@ -46,8 +46,8 @@ class LibManager {
                 Dependency.maven("org.apache.httpcomponents", "httpcore", "4.4.16"),
                 Dependency.maven("commons-io", "commons-io", "2.13.0"),
                 Dependency.maven("com.github.topi314.lavasearch", "lavasearch", "1.0.0-beta.1"),
-                Dependency.maven("com.github.topi314.lavasrc", "lavasrc", "4458182"),
-                Dependency.maven("dev.arbjerg", "lavaplayer", "78733ec"),
+                Dependency.maven("com.github.topi314.lavasrc", "lavasrc", "4.0.0-beta.6"),
+                Dependency.maven("dev.arbjerg", "lavaplayer", "2.0.1"),
                 Dependency.maven("org.slf4j", "slf4j-api", "2.0.9"),
                 Dependency.maven("org.apache.commons", "commons-collections4", "4.4"),
                 Dependency.maven("com.neovisionaries", "nv-websocket-client", "2.14"),
@@ -55,8 +55,7 @@ class LibManager {
                 Dependency.maven("club.minnced", "opus-java", "1.1.1"),
                 Dependency.maven("net.java.dev.jna", "jna", "5.13.0"),
                 Dependency.maven("net.sf.trove4j", "trove4j", "3.0.3"),
-                Dependency.maven("com.github.discord-jda", "JDA", "master-SNAPSHOT"),
-                Dependency.maven("dev.arbjerg", "lava-common", "78733ec")
+                Dependency.maven("com.github.discord-jda", "JDA", "master-SNAPSHOT")
             ).get()
 
             if (result) {
