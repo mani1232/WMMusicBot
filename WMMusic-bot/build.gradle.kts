@@ -11,7 +11,7 @@ dependencies {
     compileOnly("dev.arbjerg:lavaplayer:2.0.1")
     implementation("org.bstats:bstats-base:3.0.2")
     implementation("ch.qos.logback", "logback-classic", "1.4.11")
-    compileOnly("com.github.discord-jda:JDA:master-SNAPSHOT")
+    compileOnly("com.github.discord-jda:JDA:5.0.0-beta.13")
 
     compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
 }
