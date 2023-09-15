@@ -11,3 +11,4 @@ plugins {
 
 rootProject.name = "WMMusic"
 include("app-loader")
+include("WMMusic-bot")

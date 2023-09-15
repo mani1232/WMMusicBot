@@ -1,17 +1,4 @@
-plugins {
-    kotlin("jvm") version "1.9.10"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-}
-
-group = "ua.mani123"
-val projectName = "WMMusicLoader"
-
-repositories {
-    mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
-    maven("https://repo.hypera.dev/snapshots/")
-    maven("https://nexuslite.gcnt.net/repos/other/")
-}
+val projectName = findProperty("LoaderName")!!
 
 dependencies {
     implementation("dev.hypera:Dragonfly:0.3.0-SNAPSHOT")
@@ -22,10 +9,6 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-}
-
-tasks.test {
-    useJUnitPlatform()
 }
 
 tasks.shadowJar {
@@ -45,20 +28,4 @@ tasks.shadowJar {
         )
     }
     archiveFileName.set("$projectName-$version-all.jar")
-}
-
-kotlin {
-    jvmToolchain(17)
-}
-
-tasks {
-    javadoc {
-        options.encoding = Charsets.UTF_8.toString()
-    }
-    compileJava {
-        options.encoding = Charsets.UTF_8.toString()
-    }
-    compileTestJava {
-        options.encoding = Charsets.UTF_8.toString()
-    }
 }

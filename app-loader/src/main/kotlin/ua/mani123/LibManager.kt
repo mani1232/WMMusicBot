@@ -41,6 +41,7 @@ class LibManager {
                     "00d5258dea97b2ca623eaa8e7c251543c4f17b71-SNAPSHOT"
                 ),
                 Dependency.maven("org.mozilla", "rhino", "1.7.14"),
+                Dependency.maven("org.json", "json", "20230618"),
                 Dependency.maven("commons-logging", "commons-logging", "1.2"),
                 Dependency.maven("org.apache.httpcomponents", "httpcore", "4.4.16"),
                 Dependency.maven("commons-io", "commons-io", "2.13.0"),
@@ -59,6 +60,7 @@ class LibManager {
             ).get()
 
             if (result) {
+                println("Libs loaded, loading application")
                 urlClassLoader.addURL(
                     dragonfly.directory.resolve(
                         Connection(
@@ -67,6 +69,7 @@ class LibManager {
                         ).loadApp().name
                     ).toUri().toURL()
                 )
+                println("Application loaded, starting...")
                 return urlClassLoader.loadClass("ua.mani123.DiscordBot")
                     .getDeclaredConstructor()
                     .newInstance() as Product
