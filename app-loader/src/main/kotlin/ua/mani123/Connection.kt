@@ -7,6 +7,7 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse.BodyHandlers
 import java.time.Duration
 import java.util.*
+import kotlin.system.exitProcess
 
 
 class Connection(private val key: String, private val product: String) {
@@ -27,17 +28,22 @@ class Connection(private val key: String, private val product: String) {
             .timeout(Duration.ofSeconds(10))
             .build()
 
-        val latestVersion = client.sendAsync(versionRequest, BodyHandlers.ofString()).get().body()
+        val answer = client.sendAsync(versionRequest, BodyHandlers.ofString()).get()
+        val latestVersion = answer.body()
+        if (answer.statusCode() == 200) {
+            val fileRequest = HttpRequest.newBuilder()
+                .uri(URI("http://82.66.203.77:8080/$product/$latestVersion"))
+                .GET()
+                .header("license-key", key)
+                .header("hwid", getHwid())
+                .timeout(Duration.ofSeconds(10))
+                .build()
 
-        val fileRequest = HttpRequest.newBuilder()
-            .uri(URI("http://82.66.203.77:8080/$product/$latestVersion"))
-            .GET()
-            .header("license-key", key)
-            .header("hwid", getHwid())
-            .timeout(Duration.ofSeconds(10))
-            .build()
-
-        client.sendAsync(fileRequest, BodyHandlers.ofFile(file.toPath())).get()
+            client.sendAsync(fileRequest, BodyHandlers.ofFile(file.toPath())).get()
+        } else {
+            println("--- Error: $latestVersion")
+            exitProcess(0)
+        }
         return file
     }
 

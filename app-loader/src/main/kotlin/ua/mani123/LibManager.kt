@@ -72,7 +72,7 @@ class LibManager {
                     .getDeclaredConstructor()
                     .newInstance() as Product
             } else {
-                println("Filed download dependices")
+                println("Failed download dependency")
             }
         } else {
             println("License is empty")
