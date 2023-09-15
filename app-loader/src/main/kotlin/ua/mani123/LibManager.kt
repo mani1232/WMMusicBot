@@ -26,9 +26,6 @@ class LibManager {
             ).build()
 
             val result = dragonfly.load(
-                Dependency.maven("org.jetbrains.kotlin", "kotlin-annotations-jvm", "1.9.20-Beta"),
-                Dependency.maven("org.jetbrains.kotlin", "kotlin-stdlib", "1.9.20-Beta"),
-                Dependency.maven("org.jetbrains.kotlin", "kotlin-stdlib-common", "1.9.20-Beta"),
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-databind", "2.15.2"),
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-core", "2.15.2"),
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-annotations", "2.15.2"),
