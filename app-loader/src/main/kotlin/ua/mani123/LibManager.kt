@@ -55,6 +55,8 @@ class LibManager {
                 Dependency.maven("club.minnced", "opus-java", "1.1.1"),
                 Dependency.maven("net.java.dev.jna", "jna", "5.13.0"),
                 Dependency.maven("net.sf.trove4j", "trove4j", "3.0.3"),
+                Dependency.maven("com.squareup.okio", "okio", "3.5.0"),
+                Dependency.maven("com.squareup.okio", "okio-jvm", "3.5.0"),
                 Dependency.maven("net.dv8tion", "JDA", "5.0.0-beta.13")
             ).get()
 

@@ -7,6 +7,7 @@ val projectName = findProperty("wmMusicBotName")!!
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.6.0")
     implementation("com.charleskorn.kaml:kaml:0.55.0")
+    compileOnly(project(mapOf("path" to ":app-loader")))
     compileOnly("com.github.topi314.lavasrc:lavasrc:4.0.0-beta.6")
     compileOnly("dev.arbjerg:lavaplayer:2.0.1")
     implementation("org.bstats:bstats-base:3.0.2")

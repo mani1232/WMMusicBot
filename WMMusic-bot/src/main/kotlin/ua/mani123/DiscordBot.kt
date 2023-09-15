@@ -24,7 +24,6 @@ import ua.mani123.dataFromFile.data.LanguageData
 import ua.mani123.dataFromFile.data.StatsData
 import ua.mani123.listeners.*
 import java.lang.reflect.Method
-import kotlin.system.exitProcess
 
 
 class DiscordBot : Product {

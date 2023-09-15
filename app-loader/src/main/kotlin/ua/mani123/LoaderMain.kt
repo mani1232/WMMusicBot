@@ -25,6 +25,7 @@ private fun enableConsoleScanner(product: Product) {
                 "/stop" -> {
                     exitProcess(0)
                 }
+
                 else -> {
                     println(
                         """
