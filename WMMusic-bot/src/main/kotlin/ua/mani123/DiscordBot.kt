@@ -43,7 +43,7 @@ class DiscordBot : Product {
     private var serviceEnabled = false
     lateinit var jda: ShardManager
 
-    fun runBot() {
+    private fun runBot() {
         config = ConfigUtils(logger).loadFile(configPath, ConfigData())
         language = ConfigUtils(logger).loadFile(languagePath, LanguageData())
         stats = ConfigUtils(logger).loadFile(statsPath, StatsData())
@@ -103,7 +103,7 @@ class DiscordBot : Product {
         }
     }
 
-    fun enableMetrics(platform: String, version: String) {
+    private fun enableMetrics(platform: String, version: String) {
         if (stats.enabled) {
             metrics = MetricsBase(
                 "bukkit",
@@ -199,7 +199,6 @@ class DiscordBot : Product {
 
     override fun disable() {
         shutdown()
-        exitProcess(0)
     }
 
 }
