@@ -28,7 +28,7 @@ class Connection(private val key: String, private val product: String) {
 
         val getFileUrl = "http://82.66.203.77:8080/$product/$latestVersion"
 
-        val file = File("libs/$latestVersion")
+        val file = File("libs/$product-latest.jar")
         file.createNewFile()
 
         val fileRequest: Request = Request.Builder()
