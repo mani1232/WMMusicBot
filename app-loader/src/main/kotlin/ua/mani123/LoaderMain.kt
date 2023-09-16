@@ -6,8 +6,14 @@ import java.util.*
 import kotlin.system.exitProcess
 
 fun main() {
-    val product =
-        LoaderManager(Path.of(File(object {}.javaClass.protectionDomain.codeSource.location.toURI().path).parent)).enableLoaders()
+    val licenseFile = File("licenseKey")
+    licenseFile.createNewFile()
+    val license = licenseFile.readText().trim()
+    if (license.isEmpty()) {
+        exitProcess(0)
+    }
+
+    val product = LoaderManager(Path.of(File(object {}.javaClass.protectionDomain.codeSource.location.toURI().path).parent), license).enableLoaders()
     if (product != null) {
         product.enable("config.yml", "lang.yml", "stats.yml", "ConsoleApp")
         enableConsoleScanner(product)

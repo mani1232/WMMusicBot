@@ -17,20 +17,19 @@ class PaperDiscordBot : JavaPlugin() {
 
     override fun onEnable() {
         foliaLib.impl.runAsync {
-            product = LoaderManager(dataFolder.toPath()).enableLoaders()
-            product!!.enable(
-                "${dataFolder.path}/config.yml",
-                "${dataFolder.path}/lang.yml",
-                "${dataFolder.path}/stats.yml",
-                "Minecraft bukkit plugin"
-            )
-            //discordBot.configPath = "${dataFolder.path}/botConfig.yml"
-            //discordBot.languagePath = "${dataFolder.path}/lang.yml"
-            //discordBot.statsPath = "${dataFolder.path}/bstats.yml"
-            //discordBot.logger = slF4JLogger
-            logger.info("Starting discord bot as minecraft plugin")
-            //discordBot.runBot()
-            //discordBot.enableMetrics("Minecraft bukkit plugin", this.pluginMeta.version)
+            val license = config.getString("license-key")
+            if (!license.isNullOrEmpty()) {
+                product = LoaderManager(dataFolder.toPath(), license).enableLoaders()
+                product!!.enable(
+                    "${dataFolder.path}/config.yml",
+                    "${dataFolder.path}/lang.yml",
+                    "${dataFolder.path}/stats.yml",
+                    "Minecraft bukkit plugin"
+                )
+                logger.info("Starting discord bot as minecraft plugin")
+            } else {
+                logger.warning("License not valid")
+            }
         }
     }
 
