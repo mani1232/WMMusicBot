@@ -20,7 +20,7 @@ class PaperDiscordBot : JavaPlugin() {
             val license = config.getString("license-key")
             if (!license.isNullOrEmpty()) {
                 product = LoaderManager(dataFolder.toPath(), license).enableLoaders()
-                product!!.javaClass.getMethod("changeLogger", Logger::class.java).invoke(product, slF4JLogger)
+                //product!!.javaClass.getMethod("changeLogger", Logger::class.java).invoke(product, slF4JLogger) class not found
                 product!!.javaClass.getMethod(
                     "enable",
                     String::class.java,
