@@ -196,6 +196,10 @@ class DiscordBot {
         enableMetrics(platform, "1.0.1.0")
     }
 
+    fun changeLogger(newLogger: Logger) {
+        logger = newLogger
+    }
+
     fun disable() {
         shutdown()
     }

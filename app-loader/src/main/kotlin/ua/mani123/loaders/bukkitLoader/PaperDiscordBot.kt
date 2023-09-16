@@ -2,6 +2,7 @@ package ua.mani123.loaders.bukkitLoader
 
 import com.tcoded.folialib.FoliaLib
 import org.bukkit.plugin.java.JavaPlugin
+import org.slf4j.Logger
 import ua.mani123.LoaderManager
 
 
@@ -19,6 +20,7 @@ class PaperDiscordBot : JavaPlugin() {
             val license = config.getString("license-key")
             if (!license.isNullOrEmpty()) {
                 product = LoaderManager(dataFolder.toPath(), license).enableLoaders()
+                product!!.javaClass.getMethod("changeLogger", Logger::class.java).invoke(product, slF4JLogger)
                 product!!.javaClass.getMethod(
                     "enable",
                     String::class.java,
