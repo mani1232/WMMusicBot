@@ -2,7 +2,6 @@ package ua.mani123.loaders.bukkitLoader
 
 import com.tcoded.folialib.FoliaLib
 import org.bukkit.plugin.java.JavaPlugin
-import org.slf4j.Logger
 import ua.mani123.LoaderManager
 
 
