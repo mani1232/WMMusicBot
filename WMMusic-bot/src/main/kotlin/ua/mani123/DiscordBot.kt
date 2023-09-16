@@ -193,7 +193,7 @@ class DiscordBot {
         this.languagePath = languagePath
         this.statsPath = statsPath
         runBot()
-        enableMetrics(platform, "1.0.1.0")
+        enableMetrics(platform, "1.1.0.0")
     }
 
     fun changeLogger(newLogger: Logger) {
