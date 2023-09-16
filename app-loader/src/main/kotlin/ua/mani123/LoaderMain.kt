@@ -1,10 +1,13 @@
 package ua.mani123
 
+import java.io.File
+import java.nio.file.Path
 import java.util.*
 import kotlin.system.exitProcess
 
 fun main() {
-    val product = LibManager().loadLibs()
+    val product =
+        LoaderManager(Path.of(File(object {}.javaClass.protectionDomain.codeSource.location.toURI().path).parent)).enableLoaders()
     if (product != null) {
         product.enable("config.yml", "lang.yml", "stats.yml", "ConsoleApp")
         enableConsoleScanner(product)

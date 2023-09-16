@@ -1,31 +1,30 @@
-package ua.mani123
+package ua.mani123.loaders
 
+import dev.hypera.dragonfly.Dragonfly
 import dev.hypera.dragonfly.DragonflyBuilder
 import dev.hypera.dragonfly.dependency.Dependency
-import java.io.File
+import dev.hypera.dragonfly.loading.IClassLoader
 import java.nio.file.Path
 
+class LibsLoader(classLoader: IClassLoader, path: Path) {
 
-class LibManager {
+    private val libsLoader: Dragonfly
+    val directory: Path
 
-    fun loadLibs(): Product? {
-        println("Start loading libs")
-        val urlClassLoader = WMClassLoader()
+    init {
+        libsLoader = DragonflyBuilder.create(classLoader, path).addRepositories(
+            "https://oss.sonatype.org/content/repositories/snapshots",
+            "https://jitpack.io/",
+            "https://maven.arbjerg.dev/snapshots/",
+            "https://maven.topi.wtf/snapshots/",
+            "https://nexuslite.gcnt.net/repos/other/"
+        ).build()
+        directory = libsLoader.directory
+    }
 
-        val licenseFile = File("licenseKey")
-        licenseFile.createNewFile()
-        val license = licenseFile.readText()
-
-        if (license.isNotEmpty()) {
-            val dragonfly = DragonflyBuilder.create(urlClassLoader, Path.of("libs/")).addRepositories(
-                "https://oss.sonatype.org/content/repositories/snapshots",
-                "https://jitpack.io/",
-                "https://maven.arbjerg.dev/snapshots/",
-                "https://maven.topi.wtf/snapshots/",
-                "https://nexuslite.gcnt.net/repos/other/"
-            ).build()
-
-            val result = dragonfly.load(
+    fun loadDefaultLibs(): Boolean {
+        return loadList(
+            listOf(
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-databind", "2.15.2"),
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-core", "2.15.2"),
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-annotations", "2.15.2"),
@@ -55,29 +54,18 @@ class LibManager {
                 Dependency.maven("com.squareup.okio", "okio", "3.5.0"),
                 Dependency.maven("com.squareup.okio", "okio-jvm", "3.5.0"),
                 Dependency.maven("net.dv8tion", "JDA", "5.0.0-beta.13")
-            ).get()
+            )
+        )
+    }
 
-            if (result) {
-                println("Libs loaded, loading application")
-                urlClassLoader.addURL(
-                    dragonfly.directory.resolve(
-                        Connection(
-                            licenseFile.readText().trim(),
-                            "WMMusic"
-                        ).loadApp().name
-                    ).toUri().toURL()
-                )
-                println("Application loaded, starting...")
-                return urlClassLoader.loadClass("ua.mani123.DiscordBot")
-                    .getDeclaredConstructor()
-                    .newInstance() as Product
-            } else {
-                println("Failed download dependency")
-            }
-        } else {
-            println("License is empty")
+    fun loadList(listOfDepends: List<Dependency>): Boolean {
+        val results = mutableListOf<Boolean>()
+        for (i in listOfDepends.indices) {
+            val depend = listOfDepends[i]
+            println("Loading dependency ${depend.fileName} (${i + 1}/${listOfDepends.size})")
+            results.add(libsLoader.load(depend).get())
         }
-        return null
+        return results.all { it }
     }
 
 }

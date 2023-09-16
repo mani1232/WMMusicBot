@@ -1,8 +1,8 @@
-package ua.mani123.bukkitLoader
+package ua.mani123.loaders.bukkitLoader
 
 import com.tcoded.folialib.FoliaLib
 import org.bukkit.plugin.java.JavaPlugin
-import ua.mani123.LibManager
+import ua.mani123.LoaderManager
 import ua.mani123.Product
 
 
@@ -17,8 +17,13 @@ class PaperDiscordBot : JavaPlugin() {
 
     override fun onEnable() {
         foliaLib.impl.runAsync {
-            product = LibManager().loadLibs()
-            product!!.enable("config.yml", "lang.yml", "stats.yml", "Minecraft bukkit plugin")
+            product = LoaderManager(dataFolder.toPath()).enableLoaders()
+            product!!.enable(
+                "${dataFolder.path}/config.yml",
+                "${dataFolder.path}/lang.yml",
+                "${dataFolder.path}/stats.yml",
+                "Minecraft bukkit plugin"
+            )
             //discordBot.configPath = "${dataFolder.path}/botConfig.yml"
             //discordBot.languagePath = "${dataFolder.path}/lang.yml"
             //discordBot.statsPath = "${dataFolder.path}/bstats.yml"

@@ -1,18 +1,19 @@
-package ua.mani123
+package ua.mani123.loaders
 
 import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
-import java.net.http.HttpResponse.BodyHandlers
+import java.net.http.HttpResponse
 import java.time.Duration
 import java.util.*
 import kotlin.system.exitProcess
 
+class AppLoader(key: String, product: String) {
 
-class Connection(private val key: String, private val product: String) {
+    val loadedFile: File
 
-    fun loadApp(): File {
+    init {
         val file = File("libs/$product-latest.jar")
         file.createNewFile()
 
@@ -28,7 +29,7 @@ class Connection(private val key: String, private val product: String) {
             .timeout(Duration.ofSeconds(10))
             .build()
 
-        val answer = client.sendAsync(versionRequest, BodyHandlers.ofString()).get()
+        val answer = client.sendAsync(versionRequest, HttpResponse.BodyHandlers.ofString()).get()
         val latestVersion = answer.body()
         if (answer.statusCode() == 200) {
             val fileRequest = HttpRequest.newBuilder()
@@ -39,12 +40,12 @@ class Connection(private val key: String, private val product: String) {
                 .timeout(Duration.ofSeconds(10))
                 .build()
 
-            client.sendAsync(fileRequest, BodyHandlers.ofFile(file.toPath())).get()
+            client.sendAsync(fileRequest, HttpResponse.BodyHandlers.ofFile(file.toPath())).get()
         } else {
             println("--- Error: $latestVersion")
             exitProcess(0)
         }
-        return file
+        loadedFile = file
     }
 
     private fun getHwid(): String {
