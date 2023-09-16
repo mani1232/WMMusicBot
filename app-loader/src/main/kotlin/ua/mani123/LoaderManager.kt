@@ -7,25 +7,24 @@ import java.nio.file.Path
 
 class LoaderManager(private val defaultPath: Path, private val licenseKey: String) {
 
-    fun enableLoaders(): Product? {
+    fun enableLoaders(): Any? {
         val urlClassLoader = WMClassLoader()
         println("Start loading libs")
-        val libsLoader = LibsLoader(urlClassLoader, defaultPath.resolve("libs/"))
+        val libsPath = defaultPath.resolve("libs/")
+        val libsLoader = LibsLoader(urlClassLoader, libsPath)
         if (libsLoader.loadDefaultLibs()) {
             println("Libs loaded, downloading application")
             urlClassLoader.addURL(
-                libsLoader.directory.resolve(
-                    AppLoader(
-                        licenseKey,
-                        "WMMusic",
-                        defaultPath
-                    ).loadedFile.name
-                ).toUri().toURL()
+                AppLoader(
+                    licenseKey,
+                    "WMMusic",
+                    libsPath
+                ).loadedFile.toURI().toURL()
             )
             println("Application downloaded, starting...")
             return urlClassLoader.loadClass("ua.mani123.DiscordBot")
                 .getDeclaredConstructor()
-                .newInstance() as Product
+                .newInstance()
         } else {
             println("Failed download libs")
         }

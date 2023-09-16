@@ -15,7 +15,7 @@ class AppLoader(key: String, product: String, path: Path) {
     val loadedFile: File
 
     init {
-        val file = path.resolve("/$product-latest.jar").toFile()
+        val file = path.resolve("$product-latest.jar").toFile()
         file.createNewFile()
 
         val client: HttpClient = HttpClient.newBuilder()

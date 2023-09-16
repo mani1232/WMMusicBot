@@ -3,13 +3,12 @@ package ua.mani123.loaders.bukkitLoader
 import com.tcoded.folialib.FoliaLib
 import org.bukkit.plugin.java.JavaPlugin
 import ua.mani123.LoaderManager
-import ua.mani123.Product
 
 
 class PaperDiscordBot : JavaPlugin() {
 
     private var foliaLib = FoliaLib(this)
-    private var product: Product? = null
+    private var product: Any? = null
 
     override fun onLoad() {
         saveDefaultConfig()
@@ -20,8 +19,14 @@ class PaperDiscordBot : JavaPlugin() {
             val license = config.getString("license-key")
             if (!license.isNullOrEmpty()) {
                 product = LoaderManager(dataFolder.toPath(), license).enableLoaders()
-                product!!.enable(
-                    "${dataFolder.path}/config.yml",
+                product!!.javaClass.getMethod(
+                    "enable",
+                    String::class.java,
+                    String::class.java,
+                    String::class.java,
+                    String::class.java
+                ).invoke(
+                    product, "${dataFolder.path}/app-config.yml",
                     "${dataFolder.path}/lang.yml",
                     "${dataFolder.path}/stats.yml",
                     "Minecraft bukkit plugin"
@@ -34,6 +39,6 @@ class PaperDiscordBot : JavaPlugin() {
     }
 
     override fun onDisable() {
-        product!!.disable()
+        product!!.javaClass.getMethod("disable").invoke(product)
     }
 }

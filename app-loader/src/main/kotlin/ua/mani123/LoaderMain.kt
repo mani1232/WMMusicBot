@@ -18,7 +18,13 @@ fun main() {
         license
     ).enableLoaders()
     if (product != null) {
-        product.enable("config.yml", "lang.yml", "stats.yml", "ConsoleApp")
+        product.javaClass.getMethod(
+            "enable",
+            String::class.java,
+            String::class.java,
+            String::class.java,
+            String::class.java
+        ).invoke(product, "config.yml", "lang.yml", "stats.yml", "ConsoleApp")
         enableConsoleScanner(product)
     } else {
         println("Error")
@@ -26,9 +32,9 @@ fun main() {
     }
 }
 
-private fun enableConsoleScanner(product: Product) {
+private fun enableConsoleScanner(product: Any) {
     Runtime.getRuntime().addShutdownHook(Thread {
-        product.disable()
+        product.javaClass.getMethod("disable").invoke(product)
     })
     val scanner = Scanner(System.`in`)
     Thread {

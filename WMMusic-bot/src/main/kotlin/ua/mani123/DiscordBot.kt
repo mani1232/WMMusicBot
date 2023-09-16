@@ -26,7 +26,7 @@ import ua.mani123.listeners.*
 import java.lang.reflect.Method
 
 
-class DiscordBot : Product {
+class DiscordBot {
 
     var configPath = "/config.yml"
     var languagePath = "/lang.yml"
@@ -188,7 +188,7 @@ class DiscordBot : Product {
         return musicManager
     }
 
-    override fun enable(configPath: String, languagePath: String, statsPath: String, platform: String) {
+    fun enable(configPath: String, languagePath: String, statsPath: String, platform: String) {
         this.configPath = configPath
         this.languagePath = languagePath
         this.statsPath = statsPath
@@ -196,7 +196,7 @@ class DiscordBot : Product {
         enableMetrics(platform, "1.0.1.0")
     }
 
-    override fun disable() {
+    fun disable() {
         shutdown()
     }
 
