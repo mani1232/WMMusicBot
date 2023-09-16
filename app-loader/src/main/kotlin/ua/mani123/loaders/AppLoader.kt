@@ -5,16 +5,17 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.nio.file.Path
 import java.time.Duration
 import java.util.*
 import kotlin.system.exitProcess
 
-class AppLoader(key: String, product: String) {
+class AppLoader(key: String, product: String, path: Path) {
 
     val loadedFile: File
 
     init {
-        val file = File("libs/$product-latest.jar")
+        val file = path.resolve("/$product-latest.jar").toFile()
         file.createNewFile()
 
         val client: HttpClient = HttpClient.newBuilder()

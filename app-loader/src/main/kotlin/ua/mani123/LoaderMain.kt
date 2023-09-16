@@ -13,7 +13,10 @@ fun main() {
         exitProcess(0)
     }
 
-    val product = LoaderManager(Path.of(File(object {}.javaClass.protectionDomain.codeSource.location.toURI().path).parent), license).enableLoaders()
+    val product = LoaderManager(
+        Path.of(File(object {}.javaClass.protectionDomain.codeSource.location.toURI().path).parent),
+        license
+    ).enableLoaders()
     if (product != null) {
         product.enable("config.yml", "lang.yml", "stats.yml", "ConsoleApp")
         enableConsoleScanner(product)

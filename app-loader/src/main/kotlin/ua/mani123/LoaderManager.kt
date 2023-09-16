@@ -17,7 +17,8 @@ class LoaderManager(private val defaultPath: Path, private val licenseKey: Strin
                 libsLoader.directory.resolve(
                     AppLoader(
                         licenseKey,
-                        "WMMusic"
+                        "WMMusic",
+                        defaultPath
                     ).loadedFile.name
                 ).toUri().toURL()
             )
