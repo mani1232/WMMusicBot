@@ -1,6 +1,6 @@
 name: WMMusicLoader
 version: '1.1.0.0-release'
-main: ua.mani123.bukkitLoader.PaperDiscordBot
+main: ua.mani123.loaders.bukkitLoader.PaperDiscordBot
 load: STARTUP
 description: WMMusic discord bot, loaded as minecraft plugin
 api-version: '1.19'
