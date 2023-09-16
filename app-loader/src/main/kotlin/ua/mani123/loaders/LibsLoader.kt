@@ -4,9 +4,10 @@ import dev.hypera.dragonfly.Dragonfly
 import dev.hypera.dragonfly.DragonflyBuilder
 import dev.hypera.dragonfly.dependency.Dependency
 import dev.hypera.dragonfly.loading.IClassLoader
+import java.nio.file.Files
 import java.nio.file.Path
 
-class LibsLoader(classLoader: IClassLoader, path: Path) {
+class LibsLoader(private val classLoader: IClassLoader, path: Path) {
 
     private val libsLoader: Dragonfly
     val directory: Path
@@ -62,10 +63,23 @@ class LibsLoader(classLoader: IClassLoader, path: Path) {
         val results = mutableListOf<Boolean>()
         for (i in listOfDepends.indices) {
             val depend = listOfDepends[i]
-            println("Loading dependency ${depend.fileName} (${i + 1}/${listOfDepends.size})")
-            results.add(libsLoader.load(depend).get())
+            if (!isDownloaded(depend)) {
+                println("Loading dependency ${depend.fileName} (${i + 1}/${listOfDepends.size})")
+                results.add(libsLoader.load(depend).get())
+            } else {
+                results.add(true)
+            }
         }
         return results.all { it }
+    }
+
+    private fun isDownloaded(dependency: Dependency): Boolean {
+        return if (Files.exists(directory.resolve(dependency.fileName))) {
+            classLoader.addURL(directory.resolve(dependency.fileName).toUri().toURL())
+            true
+        } else {
+            false
+        }
     }
 
 }
