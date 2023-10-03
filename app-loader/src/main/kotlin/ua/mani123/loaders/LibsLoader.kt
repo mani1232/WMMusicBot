@@ -43,7 +43,7 @@ class LibsLoader(private val classLoader: IClassLoader, path: Path) {
                 Dependency.maven("org.apache.httpcomponents", "httpcore", "4.4.16"),
                 Dependency.maven("commons-io", "commons-io", "2.13.0"),
                 Dependency.maven("com.github.topi314.lavasearch", "lavasearch", "1.0.0-beta.1"),
-                Dependency.maven("com.github.topi314.lavasrc", "lavasrc", "4.0.0-beta.7"),
+                Dependency.maven("com.github.topi314.lavasrc", "lavasrc", "4.0.0-beta.6"),
                 Dependency.maven("dev.arbjerg", "lavaplayer", "2.0.2"),
                 Dependency.maven("org.slf4j", "slf4j-api", "2.0.9"),
                 Dependency.maven("org.apache.commons", "commons-collections4", "4.4"),
