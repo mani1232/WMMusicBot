@@ -5,7 +5,7 @@ dependencies {
     implementation("com.tcoded:FoliaLib:0.2.5")
     compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
 
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+    testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 

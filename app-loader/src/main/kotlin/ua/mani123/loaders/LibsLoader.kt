@@ -31,11 +31,11 @@ class LibsLoader(private val classLoader: IClassLoader, path: Path) {
                 Dependency.maven("com.fasterxml.jackson.core", "jackson-annotations", "2.15.2"),
                 Dependency.maven("org.apache.httpcomponents", "httpclient", "4.5.14"),
                 Dependency.maven("org.mozilla", "rhino-engine", "1.7.14"),
-                Dependency.maven("dev.arbjerg", "lava-common", "2.0.2"),
+                Dependency.maven("dev.arbjerg", "lava-common", "2.0.3"),
                 Dependency.maven(
                     "dev.arbjerg",
                     "lavaplayer-natives",
-                    "2.0.2"
+                    "2.0.3"
                 ),
                 Dependency.maven("org.mozilla", "rhino", "1.7.14"),
                 Dependency.maven("org.json", "json", "20230618"),
@@ -44,7 +44,7 @@ class LibsLoader(private val classLoader: IClassLoader, path: Path) {
                 Dependency.maven("commons-io", "commons-io", "2.13.0"),
                 Dependency.maven("com.github.topi314.lavasearch", "lavasearch", "1.0.0-beta.1"),
                 Dependency.maven("com.github.topi314.lavasrc", "lavasrc", "4.0.0-beta.6"),
-                Dependency.maven("dev.arbjerg", "lavaplayer", "2.0.2"),
+                Dependency.maven("dev.arbjerg", "lavaplayer", "2.0.3"),
                 Dependency.maven("org.slf4j", "slf4j-api", "2.0.9"),
                 Dependency.maven("org.apache.commons", "commons-collections4", "4.4"),
                 Dependency.maven("com.neovisionaries", "nv-websocket-client", "2.14"),
@@ -54,7 +54,7 @@ class LibsLoader(private val classLoader: IClassLoader, path: Path) {
                 Dependency.maven("net.sf.trove4j", "trove4j", "3.0.3"),
                 Dependency.maven("com.squareup.okio", "okio", "3.5.0"),
                 Dependency.maven("com.squareup.okio", "okio-jvm", "3.5.0"),
-                Dependency.maven("net.dv8tion", "JDA", "5.0.0-beta.15")
+                Dependency.maven("net.dv8tion", "JDA", "5.0.0-beta.18")
             )
         )
     }
