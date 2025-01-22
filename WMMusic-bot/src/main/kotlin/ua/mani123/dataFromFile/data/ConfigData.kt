@@ -15,6 +15,8 @@ data class ConfigData(
     val debugCommandUsage: Boolean = false,
     @YamlComment("Use local files?")
     val enableLocalSource: Boolean = false,
+    @YamlComment("Youtube settings")
+    val youtube: Youtube = Youtube(),
     @YamlComment("Spotify settings")
     val spotify: Spotify = Spotify(),
     @YamlComment("FloweryTTS settings")
@@ -22,6 +24,13 @@ data class ConfigData(
     @YamlComment("Commands settings")
     val command: Command = Command()
 ) {
+    @Serializable
+    data class Youtube(
+        val enable: Boolean = true,
+        @YamlComment("Not supported yet")
+        val allowSearch: Boolean = false,
+    )
+
     @Serializable
     data class Spotify(
         val enable: Boolean = false,

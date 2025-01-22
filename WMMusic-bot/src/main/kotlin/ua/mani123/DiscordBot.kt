@@ -1,9 +1,11 @@
 package ua.mani123
 
 import com.github.topi314.lavasrc.flowerytts.FloweryTTSSourceManager
+import com.github.topi314.lavasrc.mirror.DefaultMirroringAudioTrackResolver
 import com.github.topi314.lavasrc.spotify.SpotifySourceManager
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
+import dev.lavalink.youtube.YoutubeAudioSourceManager
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder
@@ -72,14 +74,19 @@ class DiscordBot {
                     AutoCompleteListener(this),
                     VoiceListeners(this)
                 ).build()
+            if (config.youtube.enable) {
+                playerManager.registerSourceManager(
+                    YoutubeAudioSourceManager(config.youtube.allowSearch)
+                )
+            }
             if (config.spotify.enable) {
                 playerManager.registerSourceManager(
                     SpotifySourceManager(
-                        null,
                         config.spotify.clientId,
                         config.spotify.clientSecret,
                         config.spotify.countryCode,
-                        playerManager
+                        playerManager,
+                        DefaultMirroringAudioTrackResolver(null)
                     )
                 )
             }
@@ -127,7 +134,8 @@ class DiscordBot {
                 { message -> logger.info(message) },
                 false,
                 false,
-                false
+                false,
+                true
             )
             metrics.addCustomChart(SingleLineChart("guilds") {
                 jda.guilds.size

@@ -10,6 +10,8 @@ import java.time.Duration
 import java.util.*
 import kotlin.system.exitProcess
 
+const val license_server: String = "https://play.worldmandia.cc:6868"
+
 class AppLoader(key: String, product: String, path: Path) {
 
     val loadedFile: File
@@ -24,7 +26,7 @@ class AppLoader(key: String, product: String, path: Path) {
             .build()
 
         val versionRequest = HttpRequest.newBuilder()
-            .uri(URI("http://82.66.203.77:8080/$product/latest-version"))
+            .uri(URI("$license_server/$product/latest-version"))
             .GET()
             .header("license-key", key)
             .timeout(Duration.ofSeconds(10))
@@ -34,7 +36,7 @@ class AppLoader(key: String, product: String, path: Path) {
         val latestVersion = answer.body()
         if (answer.statusCode() == 200) {
             val fileRequest = HttpRequest.newBuilder()
-                .uri(URI("http://82.66.203.77:8080/$product/$latestVersion"))
+                .uri(URI("$license_server/$product/$latestVersion"))
                 .GET()
                 .header("license-key", key)
                 .header("hwid", getHwid())

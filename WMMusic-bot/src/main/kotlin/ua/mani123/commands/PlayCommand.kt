@@ -22,8 +22,8 @@ class PlayCommand(private val discordBot: DiscordBot) : CommandApi {
             nameList[DiscordLocale.from(langCode.name.lowercase())] = LangHashMap(language.playCommandData)[langCode].name
         }
      */
-        command.setGuildOnly(true)
-        command.setNSFW(false)
+        command.isGuildOnly = true
+        command.isNSFW = false
         val language = discordBot.language
         command.nameLocalizations.setTranslations(
             mutableMapOf(
