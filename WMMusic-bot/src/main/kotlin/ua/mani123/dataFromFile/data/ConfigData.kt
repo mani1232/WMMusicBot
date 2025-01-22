@@ -37,7 +37,7 @@ data class ConfigData(
         @YamlComment("You can find more info here: https://developer.spotify.com/dashboard")
         val clientId: String = "CHANGE_HERE",
         val clientSecret: String = "CHANGE_HERE",
-        val countryCode: String = "UA"
+        val countryCode: String = "US"
     )
 
     @Serializable
