@@ -2,6 +2,7 @@ package ua.mani123
 
 import ua.mani123.loaders.AppLoader
 import ua.mani123.loaders.LibsLoader
+import java.net.URLClassLoader
 import java.nio.file.Path
 
 
@@ -22,7 +23,7 @@ class LoaderManager(private val defaultPath: Path, private val licenseKey: Strin
                 ).loadedFile.toURI().toURL()
             )
             println("Application downloaded, starting...")
-            return urlClassLoader.loadClass("ua.mani123.DiscordBot")
+            return URLClassLoader(urlClassLoader.urls.toTypedArray(), Thread.currentThread().contextClassLoader).loadClass("ua.mani123.DiscordBot")
                 .getDeclaredConstructor()
                 .newInstance()
         } else {

@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.sharding.ShardManager
 import net.dv8tion.jda.api.utils.Compression
 import net.dv8tion.jda.api.utils.MemberCachePolicy
 import net.dv8tion.jda.api.utils.cache.CacheFlag
+import net.dv8tion.jda.internal.utils.JDALogger
 import org.bstats.MetricsBase
 import org.bstats.charts.SingleLineChart
 import org.bukkit.Bukkit
@@ -58,6 +59,7 @@ class DiscordBot {
         if (config.command.skip) commands.add(SkipCommand(this))
         if (config.command.volume) commands.add(VolumeCommand(this))
         try {
+            JDALogger.setFallbackLoggerEnabled(false)
             jda = DefaultShardManagerBuilder.createLight(config.botToken).setCompression(Compression.ZLIB)
                 .setMemberCachePolicy(MemberCachePolicy.VOICE).enableCache(
                     mutableListOf(
