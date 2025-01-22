@@ -46,7 +46,7 @@ data class ConfigData(
         @YamlComment("You can find more voices here: https://api.flowery.pw/v1/tts/voices")
         val voice: String = "Lesya",
         val translate: Boolean = false,
-        val speed: Float = 1f
+        val speed: Float = 1.0f
     )
 
     @Serializable
